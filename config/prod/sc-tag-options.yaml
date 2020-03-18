@@ -55,6 +55,7 @@ sceptre_user_data:
     - "janae.chan@sagebase.org"
     - "jay.hodgson@sagebase.org"
     - "jineta.banerjee@sagebase.org"
+    - "joe.smith@sagebase.org"
     - "john.hill@sagebase.org"
     - "john.wilbanks@sagebase.org"
     - "joshua.liu@sagebase.org"
@@ -107,7 +108,6 @@ sceptre_user_data:
     - "yao.yan@sagebase.org"
     - "ziming.dong@sagebase.org"
     - "zoe.leanza@sagebase.org"
-    - "joe.smith@sagebase.org"
   ProductIDs:
     - "port-z2m47jv6sckgi"   # EC2 RA portfolio
     - "port-4suvomoj5jto6"   # S3 basic portfolio
