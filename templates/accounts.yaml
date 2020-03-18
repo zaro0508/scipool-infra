@@ -53,6 +53,21 @@ Resources:
       LoginProfile:
         Password: !Ref InitNewUserPassword
         PasswordResetRequired: true
+  XSchildwachterUser:
+    Type: 'AWS::IAM::User'
+    Properties:
+      UserName: x.schildwachter@sagebase.org
+      Groups:
+        - !Ref AWSIAMAllUsersGroup
+        - !Ref AWSIAMDeveloperUsersGroup
+        - !Ref AWSIAMBillingManagersGroup
+        - !ImportValue
+          'Fn::Sub': '${AWS::Region}-sc-enduser-iam-ServiceCatalogEndusers-GroupName'
+        - !ImportValue
+          'Fn::Sub': '${AWS::Region}-sc-enduser-development-iam-ServiceCatalogDevelopmentEndusers-GroupName'
+      LoginProfile:
+        Password: !Ref InitNewUserPassword
+        PasswordResetRequired: true
   AWSIAMDeveloperUsersGroup:
     Type: 'AWS::IAM::Group'
     Properties:
@@ -74,6 +89,7 @@ Resources:
                 - !GetAtt KhaiDoUser.Arn
                 - !GetAtt TessThyerUser.Arn
                 - !GetAtt AaronHaydenUser.Arn
+                - !GetAtt XSchildwachterUser.Arn
             Action:
               - "sts:AssumeRole"
       Path: "/"
