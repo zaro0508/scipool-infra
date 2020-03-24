@@ -11,6 +11,6 @@ parameters:
   StackDatetime: !date
 hooks:
   before_create:
-    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/scipoolprod-sc-lib-infra/master/ec2/development/sc-portfolio-ec2-development-tthyer.yaml --create-dirs -o templates/remote/sc-portfolio-ec2-development-tthyer.yaml"
+    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/scipoolprod-sc-lib-infra/master/ec2/development/tthyer/sc-portfolio-ec2-development-tthyer.yaml --create-dirs -o templates/remote/sc-portfolio-ec2-development-tthyer.yaml"
   before_update:
-    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/scipoolprod-sc-lib-infra/master/ec2/development/sc-portfolio-ec2-development-tthyer.yaml --create-dirs -o templates/remote/sc-portfolio-ec2-development-tthyer.yaml"
+    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/scipoolprod-sc-lib-infra/master/ec2/development/tthyer/sc-portfolio-ec2-development-tthyer.yaml --create-dirs -o templates/remote/sc-portfolio-ec2-development-tthyer.yaml"

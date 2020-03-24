@@ -2,9 +2,9 @@ template_path: "sc-tag-options.j2"
 stack_name: "sc-tag-options"
 dependencies:
   - "prod/sc-portfolio-ec2.yaml"
-  - "prod/sc-portfolio-ec2-development.yaml"
   - "prod/sc-portfolio-s3-basic.yaml"
-  - "prod/sc-portfolio-s3-basic-development.yaml"
+  - "dev/sc-portfolio-ec2-development.yaml"
+  - "dev/sc-portfolio-s3-basic-development.yaml"
 sceptre_user_data:
   Departments:
     - "CompOnc"
