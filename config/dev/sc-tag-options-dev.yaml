@@ -1,4 +1,4 @@
-template_path: "sc-tag-options.j2"
+template_path: "sc-tag-options-dev.j2"
 stack_name: "sc-tag-options-dev"
 dependencies:
   - "dev/sc-portfolio-ec2-development.yaml"
