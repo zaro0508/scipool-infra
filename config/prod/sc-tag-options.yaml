@@ -22,6 +22,7 @@ sceptre_user_data:
     - "neurofibromatosis"
     - "pson"
   OwnerEmails:
+    - "aaron.hayden@sagebase.org"
     - "anna.greenwood@sagebase.org"
     - "bruce.hoff@sagebase.org"
     - "cindy.molitor@sagebase.org"
