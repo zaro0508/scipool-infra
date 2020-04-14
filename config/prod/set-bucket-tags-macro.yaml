@@ -1,9 +1,0 @@
-template_path: remote/set-bucket-tags-macro.yaml
-stack_name: set-bucket-tags-macro
-parameters:
-  Department: "Platform"
-  Project: "Infrastructure"
-  OwnerEmail: "it@sagebase.org"
-hooks:
-  before_launch:
-    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/cfn-cr-bucket-tagger/master/set-bucket-tags-macro.yaml --create-dirs -o templates/remote/set-bucket-tags-macro.yaml"
