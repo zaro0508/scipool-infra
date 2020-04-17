@@ -5,12 +5,12 @@ dependencies:
   - "prod/sc-enduser-development-iam.yaml"
 parameters:
   LaunchRoleName: "SCEC2LaunchRole"
-  RepoRootURL: "https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/scipoolprod-sc-lib-infra/master/"
+  RepoRootURL: "https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/"
   PrincipalRoleName1: "ServiceCatalogDevelopmentEndusers"
   PrincipalGroupName1: "ServiceCatalogDevelopmentEndusers"
   StackDatetime: !date
 hooks:
   before_create:
-    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/scipoolprod-sc-lib-infra/master/ec2/development/sc-portfolio-ec2-development.yaml --create-dirs -o templates/remote/sc-portfolio-ec2-development.yaml"
+    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/ec2/development/sc-portfolio-ec2-development.yaml --create-dirs -o templates/remote/sc-portfolio-ec2-development.yaml"
   before_update:
-    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/scipoolprod-sc-lib-infra/master/ec2/development/sc-portfolio-ec2-development.yaml --create-dirs -o templates/remote/sc-portfolio-ec2-development.yaml"
+    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/ec2/development/sc-portfolio-ec2-development.yaml --create-dirs -o templates/remote/sc-portfolio-ec2-development.yaml"
