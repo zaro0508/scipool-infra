@@ -2,11 +2,11 @@ template_path: "remote/sc-portfolio-s3-basic-development.yaml"
 stack_name: "sc-portfolio-s3-basic-development"
 dependencies:
   - "prod/sc-s3-launchrole.yaml"
-  - "prod/sc-enduser-development-iam.yaml"
+  - "prod/sc-enduser-iam.yaml"
 parameters:
   LaunchRoleName: "SCS3LaunchRole"
-  PrincipalRoleName1: "ServiceCatalogDevelopmentEndusers"
-  PrincipalGroupName1: "ServiceCatalogDevelopmentEndusers"
+  PrincipalRoleName1: "ServiceCatalogEndusers"
+  PrincipalGroupName1: "ServiceCatalogEndusers"
   RepoRootURL: "https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/"
   StackDatetime: !date
 hooks:
