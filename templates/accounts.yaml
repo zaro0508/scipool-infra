@@ -20,8 +20,6 @@ Resources:
         - !Ref AWSIAMBillingManagersGroup
         - !ImportValue
           'Fn::Sub': '${AWS::Region}-sc-enduser-iam-ServiceCatalogEndusers-GroupName'
-        - !ImportValue
-          'Fn::Sub': '${AWS::Region}-sc-enduser-development-iam-ServiceCatalogDevelopmentEndusers-GroupName'
       LoginProfile:
         Password: !Ref InitNewUserPassword
         PasswordResetRequired: true
@@ -34,8 +32,6 @@ Resources:
         - !Ref AWSIAMDeveloperUsersGroup
         - !ImportValue
           'Fn::Sub': '${AWS::Region}-sc-enduser-iam-ServiceCatalogEndusers-GroupName'
-        - !ImportValue
-          'Fn::Sub': '${AWS::Region}-sc-enduser-development-iam-ServiceCatalogDevelopmentEndusers-GroupName'
       LoginProfile:
         Password: !Ref InitNewUserPassword
         PasswordResetRequired: true
@@ -48,8 +44,6 @@ Resources:
         - !Ref AWSIAMDeveloperUsersGroup
         - !ImportValue
           'Fn::Sub': '${AWS::Region}-sc-enduser-iam-ServiceCatalogEndusers-GroupName'
-        - !ImportValue
-          'Fn::Sub': '${AWS::Region}-sc-enduser-development-iam-ServiceCatalogDevelopmentEndusers-GroupName'
       LoginProfile:
         Password: !Ref InitNewUserPassword
         PasswordResetRequired: true
@@ -63,8 +57,6 @@ Resources:
         - !Ref AWSIAMBillingManagersGroup
         - !ImportValue
           'Fn::Sub': '${AWS::Region}-sc-enduser-iam-ServiceCatalogEndusers-GroupName'
-        - !ImportValue
-          'Fn::Sub': '${AWS::Region}-sc-enduser-development-iam-ServiceCatalogDevelopmentEndusers-GroupName'
       LoginProfile:
         Password: !Ref InitNewUserPassword
         PasswordResetRequired: true
