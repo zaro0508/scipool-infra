@@ -4,13 +4,8 @@ dependencies:
   - "prod/sc-ec2vpc-launchrole.yaml"
   - "prod/sc-enduser-iam.yaml"
 parameters:
-  LaunchRoleName: "SCEC2LaunchRole"
-  PrincipalRoleName1: "ServiceCatalogEndusers"
-  PrincipalGroupName1: "ServiceCatalogEndusers"
   RepoRootURL: "https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/"
   StackDatetime: !date
 hooks:
-  before_create:
-    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/ec2/sc-portfolio-ec2.yaml --create-dirs -o templates/remote/sc-portfolio-ec2.yaml"
-  before_update:
+  before_launch:
     - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/ec2/sc-portfolio-ec2.yaml --create-dirs -o templates/remote/sc-portfolio-ec2.yaml"
