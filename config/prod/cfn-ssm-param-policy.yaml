@@ -1,4 +1,11 @@
-template_path: "cfn-ssm-param-policy.yaml"
+template_path: "remote/cfn-ssm-param-policy.yaml"
 stack_name: "cfn-ssm-param-policy"
+stack_tags:
+  Department: "Platform"
+  Project: "Infrastructure"
+  OwnerEmail: "it@sagebase.org"
 dependencies:
   - "prod/cfn-ssm-param-macro.yaml"
+hooks:
+  before_launch:
+    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/iam/cfn-ssm-param-policy.yaml --create-dirs -o templates/remote/cfn-ssm-param-policy.yaml"
