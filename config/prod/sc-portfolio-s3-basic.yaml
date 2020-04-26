@@ -1,16 +1,15 @@
 template_path: "remote/sc-portfolio-s3-basic.yaml"
 stack_name: "sc-portfolio-s3-basic"
+stack_tags:
+  Department: "Platform"
+  Project: "Infrastructure"
+  OwnerEmail: "it@sagebase.org"
 dependencies:
   - "prod/sc-s3-launchrole.yaml"
   - "prod/sc-enduser-iam.yaml"
 parameters:
-  LaunchRoleName: "SCS3LaunchRole"
-  PrincipalRoleName1: "ServiceCatalogEndusers"
-  PrincipalGroupName1: "ServiceCatalogEndusers"
   RepoRootURL: "https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/"
   StackDatetime: !date
 hooks:
-  before_create:
-    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/s3/sc-portfolio-s3-basic.yaml --create-dirs -o templates/remote/sc-portfolio-s3-basic.yaml"
-  before_update:
+  before_launch:
     - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/s3/sc-portfolio-s3-basic.yaml --create-dirs -o templates/remote/sc-portfolio-s3-basic.yaml"
