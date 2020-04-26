@@ -1,0 +1,14 @@
+template_path: "remote/sc-product-ec2-linux-jumpcloud.yaml"
+stack_name: "sc-product-ec2-linux-jumpcloud"
+stack_tags:
+  Department: "Platform"
+  Project: "Infrastructure"
+  OwnerEmail: "it@sagebase.org"
+dependencies:
+  - "prod/sc-portfolio-ec2.yaml"
+parameters:
+  RepoRootURL: "https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/"
+  StackDatetime: !date
+hooks:
+  before_launch:
+    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/ec2/sc-product-ec2-linux-jumpcloud.yaml --create-dirs -o templates/remote/sc-product-ec2-linux-jumpcloud.yaml"
