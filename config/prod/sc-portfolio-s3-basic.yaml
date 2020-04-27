@@ -7,9 +7,6 @@ stack_tags:
 dependencies:
   - "prod/sc-s3-launchrole.yaml"
   - "prod/sc-enduser-iam.yaml"
-parameters:
-  RepoRootURL: "https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/"
-  StackDatetime: !date
 hooks:
   before_launch:
     - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/s3/sc-portfolio-s3-basic.yaml --create-dirs -o templates/remote/sc-portfolio-s3-basic.yaml"
