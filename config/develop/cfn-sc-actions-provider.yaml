@@ -1,4 +1,4 @@
-template_path: remote/cfn-sc-actions-provider.yaml
+template_path: remote/cfn-cr-sc-actions-provider.yaml
 stack_name: cfn-sc-actions-provider
 stack_tags:
   Department: "Platform"
@@ -8,4 +8,4 @@ dependencies:
   - develop/bootstrap.yaml
 hooks:
   before_launch:
-    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/aws-infra/master/cfn-sc-actions-provider.yaml --create-dirs -o templates/remote/cfn-sc-actions-provider.yaml"
+    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/cfn-cr-sc-actions-provider/master/cfn-cr-sc-actions-provider.yaml --create-dirs -o templates/remote/cfn-cr-sc-actions-provider.yaml"
