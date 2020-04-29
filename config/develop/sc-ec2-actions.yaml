@@ -2,7 +2,7 @@ template_path: "remote/sc-ec2-actions.yaml"
 stack_name: "sc-ec2-actions"
 dependencies:
   - "develop/sc-enduser-iam.yaml"
-  - "develop/cfn-sc-actions-provider.yaml"
+  - "develop/cfn-cr-sc-actions-provider.yaml"
 stack_tags:
   Department: "Platform"
   Project: "Infrastructure"

@@ -6,6 +6,7 @@ stack_tags:
   OwnerEmail: "it@sagebase.org"
 dependencies:
   - "develop/sc-portfolio-ec2.yaml"
+  - "develop/sc-ec2-actions.yaml"
 parameters:
   PortfolioId: !stack_output_external sc-portfolio-ec2::SCEC2portfolioId
   RepoRootURL: "https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/"
