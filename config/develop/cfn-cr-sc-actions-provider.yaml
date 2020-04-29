@@ -1,5 +1,5 @@
 template_path: remote/cfn-cr-sc-actions-provider.yaml
-stack_name: cfn-sc-actions-provider
+stack_name: cfn-cr-sc-actions-provider
 stack_tags:
   Department: "Platform"
   Project: "Infrastructure"
