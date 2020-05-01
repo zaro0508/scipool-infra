@@ -1,4 +1,4 @@
-template_path: "remote/iam/get-role-policy.yaml"
+template_path: "remote/get-role-policy.yaml"
 stack_name: "get-role-policy"
 hooks:
   before_create:
