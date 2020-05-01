@@ -1,7 +1,0 @@
-template_path: "remote/iam/sc-remoting-policy.yaml"
-stack_name: "sc-remoting-policy"
-hooks:
-  before_create:
-    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/iam/sc-remoting-policy.yaml --create-dirs -o templates/remote/sc-remoting-policy.yaml"
-  before_update:
-    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/iam/sc-remoting-policy.yaml --create-dirs -o templates/remote/sc-remoting-policy.yaml"
