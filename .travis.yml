@@ -22,4 +22,6 @@ jobs:
         - pre-commit autoupdate
         - pre-commit run --all-files
     - stage: deploy
-      script: sceptre --debug launch $TRAVIS_BRANCH --yes
+      script:
+        - sceptre --debug --ignore-dependencies delete $TRAVIS_BRANCH/sc-product-ass-ec2 --yes
+        - sceptre --debug launch $TRAVIS_BRANCH --yes
