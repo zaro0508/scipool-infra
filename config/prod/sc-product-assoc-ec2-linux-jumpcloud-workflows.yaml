@@ -1,13 +1,13 @@
 template_path: "remote/sc-ec2-action-associations.yaml"
-stack_name: "sc-product-ass-ec2-linux-jumpcloud-notebook"
+stack_name: "sc-product-assoc-ec2-linux-jumpcloud-workflows"
 stack_tags:
   Department: "Platform"
   Project: "Infrastructure"
   OwnerEmail: "it@sagebase.org"
 dependencies:
-  - "prod/sc-product-ec2-linux-jumpcloud-notebook.yaml"
+  - "prod/sc-product-ec2-linux-jumpcloud-workflows.yaml"
 parameters:
-  ProductId: !stack_output_external sc-product-ec2-linux-jumpcloud-notebook::ProductId
+  ProductId: !stack_output_external sc-product-ec2-linux-jumpcloud-workflows::ProductId
 hooks:
   before_launch:
     - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/ec2/sc-ec2-action-associations.yaml --create-dirs -o templates/remote/sc-ec2-action-associations.yaml"

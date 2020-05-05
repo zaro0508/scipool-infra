@@ -1,5 +1,5 @@
 template_path: "remote/sc-ec2-action-associations.yaml"
-stack_name: "sc-product-ass-ec2-linux-jumpcloud"
+stack_name: "sc-product-assoc-ec2-linux-jumpcloud"
 stack_tags:
   Department: "Platform"
   Project: "Infrastructure"
