@@ -1,0 +1,41 @@
+Description: Resources for Jumpcloud IDP
+AWSTemplateFormatVersion: 2010-09-09
+Parameters:
+  ScipooldevAdminMetadata:
+    Type: String
+    Description: "Public certificate for Jumpcloud AWS app"
+Resources:
+  ScipooldevAdminSamlProvider:
+    Type: Custom::SAMLProvider
+    Properties:
+      ServiceToken: !ImportValue
+        'Fn::Sub': '${AWS::Region}-cfn-cr-saml-provider-FunctionArn'
+      Name: "scipooldev-admin"
+      Metadata: !Ref ScipooldevAdminMetadata
+      URL: ""
+  ScipooldevAdminSamlProviderRole:
+    Type: AWS::IAM::Role
+    Properties:
+      MaxSessionDuration: 28800
+      RoleName: !GetAtt ScipooldevAdminSamlProvider.Name
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AdministratorAccess
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !Ref ScipooldevAdminSamlProvider
+            Action: sts:AssumeRoleWithSAML
+            Condition:
+              StringEquals:
+                "SAML:aud": "https://signin.aws.amazon.com/saml"
+Outputs:
+  ScipooldevAdminSamlProviderArn:
+    Value: !Ref ScipooldevAdminSamlProvider
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-ScipooldevAdminSamlProviderArn'
+  ScipooldevAdminSamlProviderRoleArn:
+    Value: !GetAtt ScipooldevAdminSamlProviderRole.Arn
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-ScipooldevAdminSamlProviderRoleArn'
