@@ -24,4 +24,5 @@ jobs:
     - stage: deploy
       script:
         - sceptre --debug delete $TRAVIS_BRANCH/sc-product-assoc-ec2 --yes
+        - sceptre --debug delete $TRAVIS_BRANCH/sc-product-ec2 --yes
         - sceptre --debug launch $TRAVIS_BRANCH --yes
