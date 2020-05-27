@@ -1,7 +1,0 @@
-template_path: "accounts.yaml"
-stack_name: "accounts"
-dependencies:
-  - "develop/essentials.yaml"
-  - "develop/sc-enduser-iam.yaml"
-parameters:
-  InitNewUserPassword: !ssm "/infra/InitNewUserPassword"
