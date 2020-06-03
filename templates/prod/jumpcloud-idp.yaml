@@ -20,6 +20,7 @@ Resources:
       RoleName: !GetAtt ScipoolprodAdminSamlProvider.Name
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/AdministratorAccess
+        - arn:aws:iam::aws:policy/job-function/Billing
       AssumeRolePolicyDocument:
         Version: '2012-10-17'
         Statement:
