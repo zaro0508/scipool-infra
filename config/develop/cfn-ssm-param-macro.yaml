@@ -3,7 +3,5 @@ stack_name: "cfn-ssm-param-macro"
 dependencies:
   - "develop/bootstrap.yaml"
 hooks:
-  before_create:
-    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/aws-infra/master/cfn-ssm-param-macro.yaml --create-dirs -o templates/remote/cfn-ssm-param-macro.yaml"
-  before_update:
-    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/aws-infra/master/cfn-ssm-param-macro.yaml --create-dirs -o templates/remote/cfn-ssm-param-macro.yaml"
+  before_launch:
+    - !cmd "curl https://{{stack_group_config.admincentral_cf_bucket}}.s3.amazonaws.com/aws-infra/master/cfn-ssm-param-macro.yaml --create-dirs -o templates/remote/cfn-ssm-param-macro.yaml"

@@ -11,4 +11,4 @@ parameters:
   AssumeRole: "arn:aws:iam::237179673806:role/SCEC2LaunchRole"
 hooks:
   before_launch:
-    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/ec2/sc-ec2-actions.yaml --create-dirs -o templates/remote/sc-ec2-actions.yaml"
+    - !cmd "curl https://{{stack_group_config.admincentral_cf_bucket}}.s3.amazonaws.com/{{stack_group_config.service_catalog_library}}/master/ec2/sc-ec2-actions.yaml --create-dirs -o templates/remote/sc-ec2-actions.yaml"

@@ -8,4 +8,4 @@ dependencies:
   - "develop/cfn-ssm-param-macro.yaml"
 hooks:
   before_launch:
-    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/iam/cfn-ssm-param-policy.yaml --create-dirs -o templates/remote/cfn-ssm-param-policy.yaml"
+    - !cmd "curl https://{{stack_group_config.admincentral_cf_bucket}}.s3.amazonaws.com/{{stack_group_config.service_catalog_library}}/master/iam/cfn-ssm-param-policy.yaml --create-dirs -o templates/remote/cfn-ssm-param-policy.yaml"

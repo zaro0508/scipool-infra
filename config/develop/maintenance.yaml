@@ -6,4 +6,4 @@ stack_tags:
   OwnerEmail: "it@sagebase.org"
 hooks:
   before_launch:
-    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/aws-infra/master/maintenance.yaml --create-dirs -o templates/remote/maintenance.yaml"
+    - !cmd "curl https://{{stack_group_config.admincentral_cf_bucket}}.s3.amazonaws.com/aws-infra/master/maintenance.yaml --create-dirs -o templates/remote/maintenance.yaml"
