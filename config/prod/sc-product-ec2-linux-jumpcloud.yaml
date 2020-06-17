@@ -7,7 +7,6 @@ stack_tags:
 dependencies:
   - "prod/sc-portfolio-ec2.yaml"
 parameters:
-  PortfolioId: !stack_output_external sc-portfolio-ec2::SCEC2portfolioId
   RepoRootURL: "https://{{stack_group_config.admincentral_cf_bucket}}.s3.amazonaws.com/{{stack_group_config.service_catalog_library}}/master/"
   StackDatetime: !date
 hooks:
