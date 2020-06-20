@@ -9,4 +9,4 @@ dependencies:
   - "develop/sc-enduser-iam.yaml"
 hooks:
   before_launch:
-    - !cmd "curl https://s3.amazonaws.com/{{stack_group_config.admincentral_cf_bucket}}/{{stack_group_config.service_catalog_library}}/master/s3/sc-portfolio-s3-basic.yaml --create-dirs -o templates/remote/sc-portfolio-s3-basic.yaml"
+    - !cmd "curl https://{{stack_group_config.admincentral_cf_bucket}}.s3.amazonaws.com/{{stack_group_config.service_catalog_library}}/master/s3/sc-portfolio-s3-basic.yaml --create-dirs -o templates/remote/sc-portfolio-s3-basic.yaml"
