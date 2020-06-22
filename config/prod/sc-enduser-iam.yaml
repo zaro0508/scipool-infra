@@ -1,7 +1,4 @@
-template_path: "remote/sc-enduser-iam.yaml"
+template_path: "sc-enduser-iam.yaml"
 stack_name: "sc-enduser-iam"
 dependencies:
   - "prod/essentials.yaml"
-hooks:
-  before_launch:
-    - !cmd "curl https://{{stack_group_config.admincentral_cf_bucket}}.s3.amazonaws.com/{{stack_group_config.service_catalog_library}}/master/iam/sc-enduser-iam.yaml --create-dirs -o templates/remote/sc-enduser-iam.yaml"

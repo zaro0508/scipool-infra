@@ -1,7 +1,4 @@
-template_path: "remote/sc-s3-launchrole.yaml"
+template_path: "sc-s3-launchrole.yaml"
 stack_name: "sc-s3-launchrole"
 dependencies:
   - "develop/essentials.yaml"
-hooks:
-  before_launch:
-    - !cmd "curl https://{{stack_group_config.admincentral_cf_bucket}}.s3.amazonaws.com/{{stack_group_config.service_catalog_library}}/master/iam/sc-s3-launchrole.yaml --create-dirs -o templates/remote/sc-s3-launchrole.yaml"
