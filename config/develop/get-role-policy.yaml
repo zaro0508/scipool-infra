@@ -1,5 +1,2 @@
-template_path: "remote/get-role-policy.yaml"
+template_path: "get-role-policy.yaml"
 stack_name: "get-role-policy"
-hooks:
-  before_launch:
-    - !cmd "curl https://{{stack_group_config.admincentral_cf_bucket}}.s3.amazonaws.com/{{stack_group_config.service_catalog_library}}/master/iam/get-role-policy.yaml --create-dirs -o templates/remote/get-role-policy.yaml"
