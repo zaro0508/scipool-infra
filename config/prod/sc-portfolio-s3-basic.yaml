@@ -1,4 +1,4 @@
-template_path: "remote/sc-portfolio-s3-basic.yaml"
+template_path: "sc-portfolio-s3-basic.yaml"
 stack_name: "sc-portfolio-s3-basic"
 stack_tags:
   Department: "Platform"
@@ -7,6 +7,3 @@ stack_tags:
 dependencies:
   - "prod/sc-s3-launchrole.yaml"
   - "prod/sc-enduser-iam.yaml"
-hooks:
-  before_launch:
-    - !cmd "curl https://{{stack_group_config.admincentral_cf_bucket}}.s3.amazonaws.com/{{stack_group_config.service_catalog_library}}/master/s3/sc-portfolio-s3-basic.yaml --create-dirs -o templates/remote/sc-portfolio-s3-basic.yaml"

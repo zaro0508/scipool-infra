@@ -1,4 +1,4 @@
-template_path: "remote/sc-product-s3-private-enc.yaml"
+template_path: "sc-product-s3-private-enc.yaml"
 stack_name: "sc-product-s3-private-enc"
 stack_tags:
   Department: "Platform"
@@ -9,6 +9,3 @@ dependencies:
 parameters:
   RepoRootURL: "https://{{stack_group_config.admincentral_cf_bucket}}.s3.amazonaws.com/{{stack_group_config.service_catalog_library}}/master/"
   StackDatetime: !date
-hooks:
-  before_launch:
-    - !cmd "curl https://{{stack_group_config.admincentral_cf_bucket}}.s3.amazonaws.com/{{stack_group_config.service_catalog_library}}/master/s3/sc-product-s3-private-enc.yaml --create-dirs -o templates/remote/sc-product-s3-private-enc.yaml"
