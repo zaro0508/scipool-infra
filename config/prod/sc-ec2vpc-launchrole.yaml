@@ -1,7 +1,4 @@
-template_path: "remote/sc-ec2vpc-launchrole.yaml"
+template_path: "sc-ec2vpc-launchrole.yaml"
 stack_name: "sc-ec2vpc-launchrole"
 dependencies:
   - "prod/essentials.yaml"
-hooks:
-  before_launch:
-    - !cmd "curl https://{{stack_group_config.admincentral_cf_bucket}}.s3.amazonaws.com/{{stack_group_config.service_catalog_library}}/master/iam/sc-ec2vpc-launchrole.yaml --create-dirs -o templates/remote/sc-ec2vpc-launchrole.yaml"
