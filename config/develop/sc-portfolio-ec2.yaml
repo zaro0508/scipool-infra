@@ -1,4 +1,4 @@
-template_path: "remote/sc-portfolio-ec2.yaml"
+template_path: "sc-portfolio-ec2.yaml"
 stack_name: "sc-portfolio-ec2"
 dependencies:
   - "develop/sc-ec2vpc-launchrole.yaml"
@@ -6,6 +6,3 @@ dependencies:
 parameters:
   PorfolioName: "Sage EC2 Porfolio"
   PorfolioDescription: "EC2 Products for Sage Bionetworks staff"
-hooks:
-  before_launch:
-    - !cmd "curl https://{{stack_group_config.admincentral_cf_bucket}}.s3.amazonaws.com/{{stack_group_config.service_catalog_library}}/master/ec2/sc-portfolio-ec2.yaml --create-dirs -o templates/remote/sc-portfolio-ec2.yaml"
