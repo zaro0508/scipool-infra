@@ -57,6 +57,7 @@ Resources:
                   - "cloudformation:UpdateStack"
                   - "cloudformation:CreateChangeSet"
                   - "s3:GetObject"
+                  - "lambda:InvokeFunction"
                 Resource: '*'
 Outputs:
   LaunchRoleArn:
