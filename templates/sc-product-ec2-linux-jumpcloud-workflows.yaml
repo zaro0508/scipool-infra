@@ -33,15 +33,15 @@ Resources:
       ProvisioningArtifactParameters:
         - Description: 'Baseline version.'
           Info:
-            LoadTemplateFromURL: !Sub '${RepoRootURL}ec2/sc-ec2-linux-jumpcloud-workflows-v1.0.0.yaml'
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.0/ec2/sc-ec2-linux-jumpcloud-workflows-v1.0.0.yaml'
           Name: 'v1.0.0'
         - Description: 'Includes fix for a linux relocation error.'
           Info:
-            LoadTemplateFromURL: !Sub '${RepoRootURL}ec2/sc-ec2-linux-jumpcloud-workflows-v1.0.1.yaml'
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.1/ec2/sc-ec2-linux-jumpcloud-workflows-v1.0.1.yaml'
           Name: 'v1.0.1'
         - Description: !Sub 'Fix to support multiple portfolios. Last updated at ${StackDatetime}.'
           Info:
-            LoadTemplateFromURL: !Sub '${RepoRootURL}ec2/sc-ec2-linux-jumpcloud-workflows-v1.0.2.yaml'
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.2/ec2/sc-ec2-linux-jumpcloud-workflows-v1.0.2.yaml'
           Name: 'v1.0.2'
       'Fn::Transform':
         Name: 'AWS::Include'

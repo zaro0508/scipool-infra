@@ -29,11 +29,11 @@ Resources:
       ProvisioningArtifactParameters:
         - Description: 'Baseline version.'
           Info:
-            LoadTemplateFromURL: !Sub '${RepoRootURL}s3/sc-s3-encrypted-ra-v1.0.0.yaml'
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.0/s3/sc-s3-encrypted-ra-v1.0.0.yaml'
           Name: 'v1.0.0'
         - Description: !Sub 'Fix resource contention bug with S3 custom resources. Last updated at ${StackDatetime}.'
           Info:
-            LoadTemplateFromURL: !Sub '${RepoRootURL}s3/sc-s3-encrypted-ra-v1.0.0.yaml'
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.1/s3/sc-s3-encrypted-ra-v1.0.1.yaml'
           Name: 'v1.0.1'
       'Fn::Transform':
         Name: 'AWS::Include'
