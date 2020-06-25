@@ -33,7 +33,7 @@ Resources:
       ProvisioningArtifactParameters:
         - Description: !Sub 'Baseline version. Last updated at ${StackDatetime}.'
           Info:
-            LoadTemplateFromURL: !Sub '${RepoRootURL}ec2/sc-ec2-windows-jumpcloud-v1.0.0.yaml'
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.0/ec2/sc-ec2-windows-jumpcloud-v1.0.0.yaml'
           Name: 'v1.0.0'
       'Fn::Transform':
         Name: 'AWS::Include'
