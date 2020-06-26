@@ -1,0 +1,9 @@
+AWSTemplateFormatVersion: 2010-09-09
+template_path: alb-notebook-access.yaml
+stack_name: alb-notebook-access
+parameters:
+  DomainName: "sageit.org"
+  SubDomainName: "connect"
+# SSLCertificateArn: "us-east-1-synapse-login-scipooldev-sageit-cert-SSLCertificateSageIT"
+  VpcSubnet: PublicSubnet
+  VpcName: cesspoolvpc
