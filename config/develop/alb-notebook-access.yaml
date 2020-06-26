@@ -5,5 +5,5 @@ parameters:
   DomainName: "sageit.org"
   SubDomainName: "connect"
 # SSLCertificateArn: "us-east-1-synapse-login-scipooldev-sageit-cert-SSLCertificateSageIT"
-  VpcSubnet: PublicSubnet
+# VpcSubnet: PublicSubnet
   VpcName: cesspoolvpc
