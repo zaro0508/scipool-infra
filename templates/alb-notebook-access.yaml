@@ -5,195 +5,29 @@ Parameters:
   DomainName:
     Description: 'Domain or string to register new CNAME for ALB'
     Type: String
-  SubDomainName:
-    Description: 'Sub-domain name for DNS record and cert'
-    Type: String
-#   Default: "*" #can default to wildcard cert, but require subdomain for now
-# SSLCertificateArn:
-#   Description: 'ARN of Certificate to attach to ALB'
-#   Type: String
-# VpcSubnet:
-#   Description: 'Existing public VPC subnet name to run the instance in'
-#   Type: String
-#   Default: PublicSubnet
-#   ConstraintDescription: >-
-#     Allowed values (PublicSubnet, PublicSubnet1, PublicSubnet2)
-#   AllowedValues:
-#     - PublicSubnet
-#     - PublicSubnet1
-#     - PublicSubnet2
-  VpcName:
-    Description: 'Name of an existing VPC to run the instance in'
+  VPC:
+    Description: 'VPC id for homing the ALB'
+    Type: 'AWS::EC2::VPC::Id'
+  VpcPublicSubnetA:
+    Description: 'First public subnet for redundancy'
+    Type: 'AWS::EC2::Subnet::Id'
+  VpcPublicSubnetB:
+    Description: 'Second public subnet for redundancy'
+    Type: 'AWS::EC2::Subnet::Id'
+  VpcPublicSubnetC:
+    Description: 'Third public subnet for redundancy'
+    Type: 'AWS::EC2::Subnet::Id'
+  SSLCertificateArn:
+    Description: 'ARN for a certificate that exists in the account and is valid for the domain'
     Type: String
 
 Resources:
-
-  KmsDecryptManagedPolicy:
-    Type: AWS::IAM::ManagedPolicy
-    Properties:
-      PolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Sid: ReadAccess
-            Action:
-              - 'kms:ListKeys'
-              - 'kms:ListAliases'
-              - 'kms:DescribeKey'
-              - 'kms:ListKeyPolicies'
-              - 'kms:GetKeyPolicy'
-              - 'kms:GetKeyRotationStatus'
-              - 'iam:ListUsers'
-              - 'iam:ListRoles'
-            Effect: Allow
-            Resource: !ImportValue
-              'Fn::Sub': '${AWS::Region}-${AWS::StackName}-KmsKeyArn'
-          - Sid: DecryptAccess
-            Action:
-              - 'kms:Encrypt'
-              - 'kms:Decrypt'
-            Effect: Allow
-            Resource: !ImportValue
-              'Fn::Sub': '${AWS::Region}-${AWS::StackName}-KmsKeyArn'
-
-  SsmManagedPolicy:
-    Type: AWS::IAM::ManagedPolicy
-    Properties:
-      PolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Sid: GetParamAccess
-            Action:
-              - 'ssm:*'
-            Effect: Allow
-            Resource: !Join
-              - ''
-              - - 'arn:aws:ssm:'
-                - !Ref AWS::Region
-                - ':'
-                - !Ref AWS::AccountId
-                - ':'
-                - 'parameter/'
-                - !Ref AWS::StackName
-                - '/*'
-
-  KmsKey:
-    Type: AWS::KMS::Key
-    Properties:
-      Description: !Join
-        - '-'
-        - - !Ref AWS::StackName
-          - "KmsKey"
-      KeyPolicy:
-        Version: "2012-10-17"
-        Statement:
-          -
-            Sid: "Allow administration of the key"
-            Effect: "Allow"
-            Principal:
-              AWS:
-                - !Join
-                  - ''
-                  - - 'arn:aws:iam::'
-                    - !Ref AWS::AccountId
-                    - ':root'
-                - !ImportValue
-                    'Fn::Sub': '${AWS::Region}-bootstrap-CfServiceRoleArn'
-            Action:
-              - "kms:Create*"
-              - "kms:Describe*"
-              - "kms:Enable*"
-              - "kms:List*"
-              - "kms:Put*"
-              - "kms:Update*"
-              - "kms:Revoke*"
-              - "kms:Disable*"
-              - "kms:Get*"
-              - "kms:Delete*"
-              - "kms:ScheduleKeyDeletion"
-              - "kms:CancelKeyDeletion"
-            Resource: "*"
-          -
-            Sid: "Allow use of the key"
-            Effect: "Allow"
-            Principal:
-              AWS:
-                - !Join
-                  - ''
-                  - - 'arn:aws:iam::'
-                    - !Ref AWS::AccountId
-                    - ':root'
-                - !ImportValue
-                    'Fn::Sub': '${AWS::Region}-bootstrap-CfServiceRoleArn'
-            Action:
-              - "kms:Encrypt"
-              - "kms:Decrypt"
-              - "kms:ReEncrypt*"
-              - "kms:GenerateDataKey*"
-              - "kms:DescribeKey"
-            Resource: "*"
-
-  KmsKeyAlias:
-    Type: AWS::KMS::Alias
-    Properties:
-      AliasName: !Join
-        - ''
-        - - 'alias/'
-          - !Ref AWS::StackName
-          - '/KmsKey'
-      TargetKeyId: !Ref KmsKey
-
-  DomainCertificate:
-    Type: AWS::CertificateManager::Certificate
-    Properties:
-      DomainName: !Join
-        - '.'
-        - - !Ref SubDomainName
-          - !Ref DomainName
-      DomainValidationOptions:
-        - DomainName: !Join
-            - '.'
-            - - !Ref SubDomainName
-              - !Ref DomainName
-          ValidationDomain: !Ref DomainName
-      ValidationMethod: "DNS"
-
-  ALBListenerRuleFunctionRole: # execute lambda function with this role
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service:
-                - lambda.amazonaws.com
-            Action:
-              - sts:AssumeRole
-      ManagedPolicyArns:
-        - !Ref SsmManagedPolicy
-        - !Ref KmsDecryptManagedPolicy
-        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
-#       - arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
-        - !Ref ALBListenerRuleWritePolicy
-
-  ALBListenerRuleWritePolicy:
-    Type: AWS::IAM::ManagedPolicy
-    Properties:
-      PolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Sid: ElbFullAccess
-            Effect: 'Allow'
-            Action:
-              - 'elasticloadbalancing:*'
-            Resource: !Ref ApplicationLoadBalancer
 
   EC2SecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: 'Add ingress to 443 from ALB'
-      VpcId: !ImportValue
-        'Fn::Sub': '${AWS::Region}-${VpcName}-VPCId'
+      VpcId: !Ref VPC
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 443
@@ -204,8 +38,7 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: 'Allow ingress to 443 from everywhere'
-      VpcId: !ImportValue
-        'Fn::Sub': '${AWS::Region}-${VpcName}-VPCId'
+      VpcId: !Ref VPC
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 443
@@ -218,7 +51,7 @@ Resources:
       LoadBalancerArn:
         Ref: ApplicationLoadBalancer
       Certificates:
-        - CertificateArn: !Ref DomainCertificate
+        - CertificateArn: !Ref SSLCertificateArn
       DefaultActions:
         - Type: redirect
           Order: 50000
@@ -233,13 +66,13 @@ Resources:
     Properties:
       Scheme: internet-facing
       Subnets:
-      - PublicSubnet
-      - PublicSubnet1
-      - PublicSubnet2
+      - !Ref VpcPublicSubnetA
+      - !Ref VpcPublicSubnetB
+      - !Ref VpcPublicSubnetC
       SecurityGroups:
-      - Ref: ALBSecurityGroup
+      - !Ref ALBSecurityGroup
 
-  ConnectDNSRecord: #TODO should we output a connection string based on this?
+  ConnectDNSRecord:
     Type: AWS::Route53::RecordSet
     Properties:
       HostedZoneName: !Sub '${DomainName}.'
@@ -250,16 +83,6 @@ Resources:
       - !GetAtt ApplicationLoadBalancer.DNSName
 
 Outputs:
-  ALBListenerRuleFunctionRole:
-    Description: 'Role reference for the Ruler lambda'
-    Value: !Ref ALBListenerRuleFunctionRole
-    Export:
-      Name: !Sub '${AWS::Region}-${AWS::StackName}-ALBListenerRuleFunctionRole'
-  ALBListenerRuleFunctionRoleArn:
-    Description: 'Role ARN for the Ruler lambda'
-    Value: !GetAtt ALBListenerRuleFunctionRole.Arn
-    Export:
-      Name: !Sub '${AWS::Region}-${AWS::StackName}-ALBListenerRuleFunctionRoleArn'
   ALBSecurityGroup:
     Description: 'Security group allowing public ingress to the ALB'
     Value: !Ref ALBSecurityGroup
@@ -282,42 +105,15 @@ Outputs:
       Name: !Sub '${AWS::Region}-${AWS::StackName}-ApplicationLoadBalancerArn'
   ApplicationLoadBalancerDirectHTTPSConnectionURI:
     Description: 'Connection string for ALB'
-    Value:
-      !Join
-      - ''
-      - - https://
-        - Fn::GetAtt:
-          - ApplicationLoadBalancer
-          - DNSName
+    Value: !Join ['', ['https://', !GetAtt ApplicationLoadBalancer.DNSName]]
     Export:
       Name: !Sub '${AWS::Region}-${AWS::StackName}-ApplicationLoadBalancerDirectHTTPSConnectionURI'
-  ConnectionURI:
-    Value: !Join
-           - ''
-           - - https://
-             - !Ref SubDomainName
-             - '.'
-             - !Ref DomainName
+  ConnectionURI:  #Change this value based on which routing method (dns name vs. path) works best
+    Value: !Join ['', ['https://', !Ref DomainName]]
     Export:
       Name: !Sub '${AWS::Region}-${AWS::StackName}-ConnectionURI'
-  DomainCertificateArn:
-    Value: !Ref DomainCertificate
-    Export:
-      Name: !Sub '${AWS::Region}-${AWS::StackName}-DomainCertificateArn'
   EC2SecurityGroup:
     Description: 'Security group allowing ingress to an instance from the ALB'
     Value: !Ref EC2SecurityGroup
     Export:
       Name: !Sub '${AWS::Region}-${AWS::StackName}-EC2SecurityGroup'
-  KmsKey:
-    Value: !Ref KmsKey
-    Export:
-      Name: !Sub '${AWS::Region}-${AWS::StackName}-KmsKey'
-  KmsKeyAlias:
-    Value: !Ref KmsKeyAlias
-    Export:
-      Name: !Sub '${AWS::Region}-${AWS::StackName}-KmsKeyAlias'
-  KmsKeyArn:
-    Value: !GetAtt KmsKey.Arn
-    Export:
-      Name: !Sub '${AWS::Region}-${AWS::StackName}-KmsKeyArn'
