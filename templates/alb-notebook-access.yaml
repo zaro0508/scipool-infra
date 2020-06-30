@@ -78,7 +78,7 @@ Resources:
       HostedZoneName: !Sub '${DomainName}.'
       Name: !Ref DomainName
       Type: CNAME
-      TTL: '900'
+      TTL: 900
       ResourceRecords:
       - !GetAtt ApplicationLoadBalancer.DNSName
 
