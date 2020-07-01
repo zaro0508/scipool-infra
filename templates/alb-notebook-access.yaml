@@ -6,7 +6,7 @@ Parameters:
     Description: 'Domain or string to register new CNAME for ALB'
     Type: String
   VPC:
-    Description: 'VPC id for homing the ALB'
+    Description: 'VPC id for holding the ALB'
     Type: 'AWS::EC2::VPC::Id'
   VpcPublicSubnetA:
     Description: 'First public subnet for redundancy'
@@ -98,11 +98,11 @@ Outputs:
     Value: !Ref ApplicationLoadBalancer
     Export:
       Name: !Sub '${AWS::Region}-${AWS::StackName}-ApplicationLoadBalancer'
-  ApplicationLoadBalancerARN:
-    Description: 'Application Load Balancer Arn'
-    Value: !Ref ApplicationLoadBalancer
+  ALBListenerARN:
+    Description: 'ARN of the ALB Listener'
+    Value: !Ref ALBListener
     Export:
-      Name: !Sub '${AWS::Region}-${AWS::StackName}-ApplicationLoadBalancerArn'
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-ALBListenerARN'
   ApplicationLoadBalancerDirectHTTPSConnectionURI:
     Description: 'Connection string for ALB'
     Value: !Join ['', ['https://', !GetAtt ApplicationLoadBalancer.DNSName]]

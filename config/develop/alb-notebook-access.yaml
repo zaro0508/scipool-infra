@@ -2,9 +2,9 @@ AWSTemplateFormatVersion: 2010-09-09
 template_path: alb-notebook-access.yaml
 stack_name: alb-notebook-access
 parameters:
-  DomainName: "scipooldev.org"
+  DomainName: "connect.scipooldev.org" #must be a subdomain.domain.tld that does not exist
   Vpc: !stack_output_external cesspoolvpc::VPCId
   VpcPublicSubnetA: !stack_output_external cesspoolvpc::PublicSubnet
   VpcPublicSubnetB: !stack_output_external cesspoolvpc::PublicSubnet1
   VpcPublicSubnetC: !stack_output_external cesspoolvpc::PublicSubnet2
-  SSLCertificateArn: 'arn:aws:acm:us-east-1:465877038949:certificate/10b9fef3-6e54-49e7-abf9-8484b6808c2a'
+  SSLCertificateArn: !stack_outpu_external synapse-login-scipooldev-base::SSLCertificate
