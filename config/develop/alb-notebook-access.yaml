@@ -7,4 +7,4 @@ parameters:
   VpcPublicSubnetA: !stack_output_external cesspoolvpc::PublicSubnet
   VpcPublicSubnetB: !stack_output_external cesspoolvpc::PublicSubnet1
   VpcPublicSubnetC: !stack_output_external cesspoolvpc::PublicSubnet2
-  SSLCertificateArn: !stack_outpu_external synapse-login-scipooldev-base::SSLCertificate
+  SSLCertificateArn: !stack_output_external synapse-login-scipooldev-base::SSLCertificate
