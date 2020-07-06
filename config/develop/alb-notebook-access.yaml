@@ -2,8 +2,8 @@ AWSTemplateFormatVersion: 2010-09-09
 template_path: alb-notebook-access.yaml
 stack_name: alb-notebook-access
 parameters:
-  DomainName: "connect.scipooldev.org" #must be a subdomain.domain.tld that does not exist
-  Vpc: !stack_output_external cesspoolvpc::VPCId
+  DomainName: "scipooldev.org" 
+  VPC: !stack_output_external cesspoolvpc::VPCId
   VpcPublicSubnetA: !stack_output_external cesspoolvpc::PublicSubnet
   VpcPublicSubnetB: !stack_output_external cesspoolvpc::PublicSubnet1
   VpcPublicSubnetC: !stack_output_external cesspoolvpc::PublicSubnet2

@@ -76,7 +76,7 @@ Resources:
     Type: AWS::Route53::RecordSet
     Properties:
       HostedZoneName: !Sub '${DomainName}.'
-      Name: !Ref DomainName
+      Name: !Join ['', ['connect.', !Ref DomainName]] #hard-coded subdomain points to ALB
       Type: CNAME
       TTL: 900
       ResourceRecords:
