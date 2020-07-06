@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: 2010-09-09
 template_path: alb-notebook-access.yaml
 stack_name: alb-notebook-access
 parameters:
-  DomainName: "scipooldev.org" 
+  DomainName: "scipooldev.org"
   VPC: !stack_output_external cesspoolvpc::VPCId
   VpcPublicSubnetA: !stack_output_external cesspoolvpc::PublicSubnet
   VpcPublicSubnetB: !stack_output_external cesspoolvpc::PublicSubnet1
