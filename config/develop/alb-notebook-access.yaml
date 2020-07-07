@@ -3,6 +3,7 @@ template_path: alb-notebook-access.yaml
 stack_name: alb-notebook-access
 parameters:
   DomainName: "scipooldev.org"
+  SubDomainName: "connect"
   VPC: !stack_output_external cesspoolvpc::VPCId
   VpcPublicSubnetA: !stack_output_external cesspoolvpc::PublicSubnet
   VpcPublicSubnetB: !stack_output_external cesspoolvpc::PublicSubnet1
