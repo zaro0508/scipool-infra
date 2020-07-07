@@ -5,6 +5,9 @@ Parameters:
   DomainName:
     Description: 'Domain or string to register new CNAME for ALB'
     Type: String
+  SubDomainName:
+    Description: 'Domain or string to register new CNAME for ALB'
+    Type: String
   VPC:
     Description: 'VPC id for holding the ALB'
     Type: 'AWS::EC2::VPC::Id'
@@ -76,7 +79,7 @@ Resources:
     Type: AWS::Route53::RecordSet
     Properties:
       HostedZoneName: !Sub '${DomainName}.'
-      Name: !Ref DomainName
+      Name: !Join ['', [!Ref SubDomainName, ., !Ref DomainName]]
       Type: CNAME
       TTL: 900
       ResourceRecords:
@@ -109,7 +112,7 @@ Outputs:
     Export:
       Name: !Sub '${AWS::Region}-${AWS::StackName}-ApplicationLoadBalancerDirectHTTPSConnectionURI'
   ConnectionURI:  #Change this value based on which routing method (dns name vs. path) works best
-    Value: !Join ['', ['https://', !Ref DomainName]]
+    Value: !Join ['', ['https://', !Ref SubDomainName, ., !Ref DomainName]]
     Export:
       Name: !Sub '${AWS::Region}-${AWS::StackName}-ConnectionURI'
   EC2SecurityGroup:
