@@ -32,7 +32,7 @@ Resources:
       KeyPolicy:
         Version: "2012-10-17"
         Statement:
-          - Sid: 'Allow all KMS to root'
+          - Sid: 'Default KMS Policy' # https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
             Effect: 'Allow'
             Principal:
               AWS: !Sub 'arn:aws:iam::${AWS::AccountId}:root'
