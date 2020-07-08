@@ -1,0 +1,2 @@
+template_path: "sc-kms-key.yaml"
+stack_name: "sc-kms-key"
