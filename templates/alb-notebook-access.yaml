@@ -26,17 +26,6 @@ Parameters:
 
 Resources:
 
-  EC2SecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: 'Add ingress to 443 from ALB'
-      VpcId: !Ref VPC
-      SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 443
-          ToPort: 443
-          SourceSecurityGroupId: !Ref ALBSecurityGroup
-
   ALBSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -115,8 +104,3 @@ Outputs:
     Value: !Join ['', ['https://', !Ref SubDomainName, ., !Ref DomainName]]
     Export:
       Name: !Sub '${AWS::Region}-${AWS::StackName}-ConnectionURI'
-  EC2SecurityGroup:
-    Description: 'Security group allowing ingress to an instance from the ALB'
-    Value: !Ref EC2SecurityGroup
-    Export:
-      Name: !Sub '${AWS::Region}-${AWS::StackName}-EC2SecurityGroup'
