@@ -1,0 +1,11 @@
+AWSTemplateFormatVersion: 2010-09-09
+template_path: alb-notebook-access.yaml
+stack_name: alb-notebook-access
+parameters:
+  DomainName: "scipoolprod.org"
+  SubDomainName: "connect"
+  VPC: !stack_output_external internalpoolvpc::VPCId
+  VpcPublicSubnetA: !stack_output_external internalpoolvpc::PublicSubnet
+  VpcPublicSubnetB: !stack_output_external internalpoolvpc::PublicSubnet1
+  VpcPublicSubnetC: !stack_output_external internalpoolvpc::PublicSubnet2
+  SSLCertificateArn: !stack_output_external synapse-login-scipoolprod-base::SSLCertificate
