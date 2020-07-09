@@ -1,5 +1,11 @@
 AWSTemplateFormatVersion: '2010-09-09'
+
 Description: Service Catalog KMS Key and IAM policy
+
+Parameters:
+  AdminRoleArn:
+    Type: String
+    Description: ARN of the Administrator Role for a particular account
 
 Resources:
 
@@ -9,7 +15,7 @@ Resources:
       PolicyDocument:
         Version: 2012-10-17
         Statement:
-          - Sid: ReadAccess # WIP
+          - Sid: ReadAccess
             Action:
               - 'kms:Describe*'
               - 'kms:GetKeyPolicy'
@@ -32,7 +38,7 @@ Resources:
       KeyPolicy:
         Version: "2012-10-17"
         Statement:
-          - Sid: 'Default KMS Policy' # https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
+          - Sid: 'Default KMS Policy that enables IAM permissions'  # https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default
             Effect: 'Allow'
             Principal:
               AWS: !Sub 'arn:aws:iam::${AWS::AccountId}:root'
@@ -45,6 +51,7 @@ Resources:
               AWS:
                 - !ImportValue
                     'Fn::Sub': '${AWS::Region}-bootstrap-CfServiceRoleArn'
+                - !Ref AdminRoleArn
             Action:
               - "kms:Create*"
               - "kms:Describe*"
