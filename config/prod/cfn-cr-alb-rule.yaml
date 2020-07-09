@@ -5,7 +5,7 @@ stack_tags:
   Project: "Infrastructure"
   OwnerEmail: "it@sagebase.org"
 parameters:
-  OidcClientSecretKeyName: '/alb-notebook-access/AuthenticateOidcClientSecret'
+  OidcClientSecretKeyName: '/service-catalog/SynapseOauthClientSecret'
   OidcIssuer: 'https://repo-prod.prod.sagebase.org/auth/v1'
   OidcAuthorizationEndpoint: 'https://signin.synapse.org'
   OidcTokenEndpoint: 'https://repo-prod.prod.sagebase.org/auth/v1/oauth2/token'
