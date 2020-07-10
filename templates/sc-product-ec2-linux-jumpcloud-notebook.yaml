@@ -39,10 +39,14 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.1/ec2/sc-ec2-linux-jumpcloud-notebook-v1.0.1.yaml'
           Name: 'v1.0.1'
-        - Description: !Sub 'Fix to support multiple portfolios. Last updated at ${StackDatetime}.'
+        - Description: 'Fix to support multiple portfolios.'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.2/ec2/sc-ec2-linux-jumpcloud-notebook-v1.0.2.yaml'
           Name: 'v1.0.2'
+        - Description: !Sub 'Adds alb-listener-rule custom resource, enabling connection outside VPN. Last updated at ${StackDatetime}'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.1/ec2/sc-ec2-linux-jumpcloud-notebook.yaml'
+          Name: 'v1.1.1'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:
