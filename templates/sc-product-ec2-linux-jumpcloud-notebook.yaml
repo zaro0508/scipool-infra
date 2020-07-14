@@ -39,11 +39,11 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.1/ec2/sc-ec2-linux-jumpcloud-notebook-v1.0.1.yaml'
           Name: 'v1.0.1'
-        - Description: 'Fix to support multiple portfolios.'
+        - Description: 'Adds alb-listener-rule custom resource, enabling connection outside VPN'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.2/ec2/sc-ec2-linux-jumpcloud-notebook-v1.0.2.yaml'
           Name: 'v1.0.2'
-        - Description: !Sub 'Adds alb-listener-rule custom resource, enabling connection outside VPN'
+        - Description: 'Adds alb-listener-rule custom resource, enabling connection outside VPN'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.1/ec2/sc-ec2-linux-jumpcloud-notebook.yaml'
           Name: 'v1.1.1'
