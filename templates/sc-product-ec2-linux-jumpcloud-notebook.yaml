@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: 'Notebook Linux EC2 ServiceCatalog product '
+Description: 'Notebook Linux EC2 ServiceCatalog product'
 Parameters:
   RepoRootURL:
     Type: String
