@@ -38,7 +38,7 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.1/ec2/sc-ec2-linux-jumpcloud-v1.0.1.yaml'
           Name: 'v1.0.1'
-        - Description: !Sub 'Fix to support multiple portfolios'
+        - Description: 'Fix to support multiple portfolios'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.2/ec2/sc-ec2-linux-jumpcloud-v1.0.2.yaml'
           Name: 'v1.0.2'
