@@ -43,7 +43,7 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.2/ec2/sc-ec2-linux-jumpcloud-notebook-v1.0.2.yaml'
           Name: 'v1.0.2'
-        - Description: 'Adds alb-listener-rule custom resource, enabling connection outside VPN'
+        - Description: 'Add target group, alb listener rule-making custom resource, and new NotebookConnectionUri'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.1/ec2/sc-ec2-linux-jumpcloud-notebook.yaml'
           Name: 'v1.1.1'
