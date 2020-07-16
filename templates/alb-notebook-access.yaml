@@ -24,6 +24,15 @@ Parameters:
     Description: 'ARN for a certificate that exists in the account and is valid for the domain'
     Type: String
 
+Mappings:
+  ELBAccountsMap:
+    us-east-1:
+      "ELBAccountRoot": "arn:aws:iam::127311923021:root"
+    us-west-2:
+      "ELBAccountRoot": "arn:aws:iam::797873946194:root"
+    us-west-1:
+      "ELBAccountRoot": "arn:aws:iam::027434742980:root"
+
 Resources:
 
   ALBSecurityGroup:
@@ -53,6 +62,55 @@ Resources:
       Port: 443
       Protocol: HTTPS
 
+  ALBAccessLogsBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: Retain
+    UpdateReplacePolicy: Retain
+    Properties:
+      AccessControl: Private
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      LifecycleConfiguration:
+        Rules:
+        - ExpirationInDays: 90
+          Status: Enabled
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: True
+        BlockPublicPolicy: True
+
+# AWS required policy for writing ALB logs:
+# https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-access-logs.html#access-logging-bucket-permissions
+  ALBAccessLogsBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref ALBAccessLogsBucket
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: AllowALBAccountWrite
+            Effect: Allow
+            Principal:
+              AWS: !FindInMap [ ELBAccountsMap, !Ref "AWS::Region", ELBAccountRoot ]
+            Action: s3:PutObject
+            Resource: !Sub ${ALBAccessLogsBucket.Arn}/*
+          - Sid: AllowAwsServiceWrite
+            Effect: Allow
+            Principal:
+              Service: delivery.logs.amazonaws.com
+            Action: s3:PutObject
+            Resource: !Sub ${ALBAccessLogsBucket.Arn}/*
+            Condition:
+              StringEquals:
+                s3:x-amz-acl: bucket-owner-full-control
+          - Sid: AllowAwsServiceAclCheck
+            Effect: Allow
+            Principal:
+              Service: delivery.logs.amazonaws.com
+            Action: s3:GetBucketAcl
+            Resource: !GetAtt ALBAccessLogsBucket.Arn
+
   ApplicationLoadBalancer:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties:
@@ -63,6 +121,13 @@ Resources:
       - !Ref VpcPublicSubnetC
       SecurityGroups:
       - !Ref ALBSecurityGroup
+      LoadBalancerAttributes:
+        - Key: access_logs.s3.enabled
+          Value: 'true'
+        - Key: access_logs.s3.bucket
+          Value: !Ref ALBAccessLogsBucket
+        - Key: access_logs.s3.prefix
+          Value: !Join ['', [!Ref SubDomainName, ., !Ref DomainName]]
 
   ConnectDNSRecord:
     Type: AWS::Route53::RecordSet
@@ -90,6 +155,11 @@ Outputs:
     Value: !Ref ApplicationLoadBalancer
     Export:
       Name: !Sub '${AWS::Region}-${AWS::StackName}-ApplicationLoadBalancer'
+  ALBAccessLogsBucketArn:
+    Description: 'Application Load Balancer access logs output S3 bucket'
+    Value: !GetAtt ALBAccessLogsBucket.Arn
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-ALBAccessLogsBucketArn'
   ALBListenerARN:
     Description: 'ARN of the ALB Listener'
     Value: !Ref ALBListener
