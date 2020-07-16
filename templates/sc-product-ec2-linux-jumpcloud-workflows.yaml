@@ -1,5 +1,5 @@
 AWSTemplateFormatVersion: '2010-09-09'
-Description: 'Workflows Linux EC2 ServiceCatalog product with Jumpcloud integration.'
+Description: 'Workflows Linux EC2 ServiceCatalog product'
 Parameters:
   RepoRootURL:
     Type: String
@@ -39,10 +39,14 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.1/ec2/sc-ec2-linux-jumpcloud-workflows-v1.0.1.yaml'
           Name: 'v1.0.1'
-        - Description: !Sub 'Fix to support multiple portfolios. Last updated at ${StackDatetime}.'
+        - Description: 'Fix to support multiple portfolios'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.2/ec2/sc-ec2-linux-jumpcloud-workflows-v1.0.2.yaml'
           Name: 'v1.0.2'
+        - Description: !Sub 'Remove Jumpcloud Integration. Last updated at ${StackDatetime}.'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.2/ec2/sc-ec2-linux-jumpcloud-workflows-v1.0.2.yaml'
+          Name: 'v1.1.2'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:
