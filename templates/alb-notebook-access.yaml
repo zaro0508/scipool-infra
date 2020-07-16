@@ -27,11 +27,11 @@ Parameters:
 Mappings:
   ELBAccountsMap:
     us-east-1:
-      "ELBAccountRoot": "arn:aws:iam:127311923021:root"
+      "ELBAccountRoot": "arn:aws:iam::127311923021:root"
     us-west-2:
-      "ELBAccountRoot": "arn:aws:iam:797873946194:root"
+      "ELBAccountRoot": "arn:aws:iam::797873946194:root"
     us-west-1:
-      "ELBAccountRoot": "arn:aws:iam:027434742980:root"
+      "ELBAccountRoot": "arn:aws:iam::027434742980:root"
 
 Resources:
 
@@ -67,7 +67,8 @@ Resources:
     DeletionPolicy: Retain
     UpdateReplacePolicy: Retain
     Properties:
-      BucketName: !Sub ${AWS::Region}-${AWS::StackName}-access
+#     BucketName: !Sub ${AWS::StackName}-weblogs
+      AccessControl: Private
       BucketEncryption:
         ServerSideEncryptionConfiguration:
           - ServerSideEncryptionByDefault:
@@ -76,6 +77,9 @@ Resources:
         Rules:
         - ExpirationInDays: 90
           Status: Enabled
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: True
+        BlockPublicPolicy: True
 
 # AWS required policy for writing ALB logs:
 # https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-access-logs.html#access-logging-bucket-permissions
@@ -91,15 +95,13 @@ Resources:
             Principal:
               AWS: !FindInMap [ ELBAccountsMap, !Ref "AWS::Region", ELBAccountRoot ]
             Action: s3:PutObject
-            Resource:
-              - !Sub ${ALBAccessLogsBucket.Arn}/*
+            Resource: !Sub ${ALBAccessLogsBucket.Arn}/*
           - Sid: AllowAwsServiceWrite
             Effect: Allow
             Principal:
               Service: delivery.logs.amazonaws.com
             Action: s3:PutObject
-            Resource:
-              - !Sub ${ALBAccessLogsBucket.Arn}/*
+            Resource: !Sub ${ALBAccessLogsBucket.Arn}/*
             Condition:
               StringEquals:
                 s3:x-amz-acl: bucket-owner-full-control
@@ -108,8 +110,7 @@ Resources:
             Principal:
               Service: delivery.logs.amazonaws.com
             Action: s3:GetBucketAcl
-            Resource:
-              - !GetAtt ALBAccessLogsBucket.Arn
+            Resource: !GetAtt ALBAccessLogsBucket.Arn
 
   ApplicationLoadBalancer:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
@@ -127,7 +128,7 @@ Resources:
         - Key: access_logs.s3.bucket
           Value: !Ref ALBAccessLogsBucket
         - Key: access_logs.s3.prefix
-          Value: !Join ['', [!Ref SubDomainName, ., !Ref DomainName, "-access"]]
+          Value: !Join ['', [!Ref SubDomainName, ., !Ref DomainName]]
 
   ConnectDNSRecord:
     Type: AWS::Route53::RecordSet
