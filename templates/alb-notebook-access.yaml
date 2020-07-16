@@ -67,7 +67,6 @@ Resources:
     DeletionPolicy: Retain
     UpdateReplacePolicy: Retain
     Properties:
-#     BucketName: !Sub ${AWS::StackName}-weblogs
       AccessControl: Private
       BucketEncryption:
         ServerSideEncryptionConfiguration:
