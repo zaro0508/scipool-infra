@@ -98,11 +98,6 @@ Outputs:
     Value: !Ref ApplicationLoadBalancer
     Export:
       Name: !Sub '${AWS::Region}-${AWS::StackName}-ApplicationLoadBalancer'
-  ALBAccessLogsBucketArn:
-    Description: 'Application Load Balancer access logs output S3 bucket'
-    Value: !GetAtt ALBAccessLogsBucket.Arn
-    Export:
-      Name: !Sub '${AWS::Region}-${AWS::StackName}-ALBAccessLogsBucketArn'
   ALBListenerARN:
     Description: 'ARN of the ALB Listener'
     Value: !Ref ALBListener
