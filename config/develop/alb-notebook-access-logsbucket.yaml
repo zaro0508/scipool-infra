@@ -1,8 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
-template_path: alb-notebook-access.yaml
-stack_name: alb-notebook-access
-dependencies:
-  alb-notebook-access-logsbucket
+template_path: alb-notebook-access-logsbucket.yaml
+stack_name: alb-notebook-access-logsbucket
 parameters:
   DomainName: "scipooldev.org"
   SubDomainName: "connect"
