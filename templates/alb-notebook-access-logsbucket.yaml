@@ -1,29 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: Create ALB that can be modified by Service Catalog provisioning requests
 
-Parameters:
-  DomainName:
-    Description: 'Domain or string to register new CNAME for ALB'
-    Type: String
-  SubDomainName:
-    Description: 'Domain or string to register new CNAME for ALB'
-    Type: String
-  VPC:
-    Description: 'VPC id for holding the ALB'
-    Type: 'AWS::EC2::VPC::Id'
-  VpcPublicSubnetA:
-    Description: 'First public subnet for redundancy'
-    Type: 'AWS::EC2::Subnet::Id'
-  VpcPublicSubnetB:
-    Description: 'Second public subnet for redundancy'
-    Type: 'AWS::EC2::Subnet::Id'
-  VpcPublicSubnetC:
-    Description: 'Third public subnet for redundancy'
-    Type: 'AWS::EC2::Subnet::Id'
-  SSLCertificateArn:
-    Description: 'ARN for a certificate that exists in the account and is valid for the domain'
-    Type: String
-
 Mappings:
   ELBAccountsMap:
     us-east-1:
