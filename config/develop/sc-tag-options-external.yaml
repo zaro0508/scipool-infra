@@ -1,4 +1,4 @@
-template_path: "sc-tag-options-external.j2"
+template_path: "sc-tag-options.j2"
 stack_name: "sc-tag-options-external"
 stack_tags:
   Department: "Platform"
