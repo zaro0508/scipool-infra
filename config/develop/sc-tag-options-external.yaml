@@ -1,3 +1,4 @@
+# Tag options for External Sage teams
 template_path: "sc-tag-options.j2"
 stack_name: "sc-tag-options-external"
 stack_tags:
