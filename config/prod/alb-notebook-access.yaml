@@ -1,6 +1,7 @@
-AWSTemplateFormatVersion: 2010-09-09
 template_path: alb-notebook-access.yaml
 stack_name: alb-notebook-access
+dependencies:
+  - prod/alb-notebook-access-logsbucket.yaml
 parameters:
   DomainName: "scipoolprod.org"
   SubDomainName: "connect"
