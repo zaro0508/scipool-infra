@@ -12,8 +12,6 @@ install:
   - pip install pre-commit sceptre sceptre-ssm-resolver sceptre-date-resolver
 stages:
   - name: validate
-  - name: disassociate-sc-actions
-    if: type = push AND branch = develop
   - name: deploy
     if: type = push
 jobs:
@@ -23,9 +21,8 @@ jobs:
       script:
         - pre-commit autoupdate
         - pre-commit run --all-files
-    - stage: disassociate-sc-actions
-      script:
-        - sceptre delete $TRAVIS_BRANCH/sc-product-assoc-ec2 --yes
     - stage: deploy
       script:
+        # SC-26 & SC-219 workaround: dis-associate and re-associate SC actions on every deploy
+        - sceptre delete $TRAVIS_BRANCH/sc-product-assoc-ec2 --yes
         - sceptre launch $TRAVIS_BRANCH --yes
