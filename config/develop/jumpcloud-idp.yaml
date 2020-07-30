@@ -6,5 +6,6 @@ stack_tags:
   OwnerEmail: "it@sagebase.org"
 parameters:
   ScipooldevAdminMetadata: !file_contents idp/jumpcloud/scipooldev-admin.xml
+  ScipooldevCommunityMgrMetadata: !file_contents idp/jumpcloud/scipooldev-communitymgr.xml
 dependencies:
   - "develop/cfn-cr-saml-provider.yaml"
