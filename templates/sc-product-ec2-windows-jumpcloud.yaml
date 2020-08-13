@@ -31,10 +31,14 @@ Resources:
       Description: This product builds one Microsoft Windows EC2 instance with
         Jumpcloud integration.
       ProvisioningArtifactParameters:
-        - Description: !Sub 'Baseline version. Last updated at ${StackDatetime}.'
+        - Description: 'Baseline version.'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.0/ec2/sc-ec2-windows-jumpcloud-v1.0.0.yaml'
           Name: 'v1.0.0'
+        - Description: !Sub 'Update base AMI and Cloudformation hooks. Last updated at ${StackDatetime}.'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.3/ec2/sc-ec2-windows-jumpcloud-v1.0.0.yaml'
+          Name: 'v1.1.3'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:
