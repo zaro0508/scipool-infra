@@ -47,10 +47,14 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.2/ec2/sc-ec2-linux-jumpcloud-workflows.yaml'
           Name: 'v1.1.2'
-        - Description: !Sub 'Update Cloudformation hooks. Last updated at ${StackDatetime}.'
+        - Description: 'Update Cloudformation hooks.'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.3/ec2/sc-ec2-linux-jumpcloud-workflows.yaml'
           Name: 'v1.1.3'
+        - Description: !Sub 'Add ssm-user to docker group, remove reference to JC user. Last updated at ${StackDatetime}.'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.4/ec2/sc-ec2-linux-jumpcloud-workflows.yaml'
+          Name: 'v1.1.4'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:
