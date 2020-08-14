@@ -4,6 +4,10 @@ Parameters:
   ScipoolprodAdminMetadata:
     Type: String
     Description: "Public certificate for Jumpcloud AWS app"
+  ScipoolprodCommunityMgrMetadata:
+    Type: String
+    Description: "Public certificate for the community manager Jumpcloud AWS app"
+
 Resources:
   ScipoolprodAdminSamlProvider:
     Type: Custom::SAMLProvider
@@ -31,6 +35,48 @@ Resources:
             Condition:
               StringEquals:
                 "SAML:aud": "https://signin.aws.amazon.com/saml"
+  ScipoolprodCommunityMgrSamlProvider:
+    Type: Custom::SAMLProvider
+    Properties:
+      ServiceToken: !ImportValue
+        'Fn::Sub': '${AWS::Region}-cfn-cr-saml-provider-FunctionArn'
+      Name: "scipoolprod-communitymgr"
+      Metadata: !Ref ScipoolprodCommunityMgrMetadata
+      URL: ""
+  ScipoolprodCommunityMgrSamlProviderRole:
+    Type: AWS::IAM::Role
+    Properties:
+      MaxSessionDuration: 28800
+      RoleName: !GetAtt ScipoolprodCommunityMgrSamlProvider.Name
+      ManagedPolicyArns:
+        - !Ref AWSIAMCommunityMgrAccessPolicy
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Federated: !Ref ScipoolprodCommunityMgrSamlProvider
+            Action: sts:AssumeRoleWithSAML
+            Condition:
+              StringEquals:
+                "SAML:aud": "https://signin.aws.amazon.com/saml"
+  AWSIAMCommunityMgrAccessPolicy:
+    Type: "AWS::IAM::ManagedPolicy"
+    Properties:
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Allow"
+            Action:
+              - aws-portal:ViewUsage
+              - aws-portal:ViewBilling
+              - cur:DescribeReportDefinitions
+              - cur:PutReportDefinition
+              - cur:DeleteReportDefinition
+              - cur:ModifyReportDefinition
+            Resource: "*"
+
 Outputs:
   ScipoolprodAdminSamlProviderArn:
     Value: !Ref ScipoolprodAdminSamlProvider
@@ -40,3 +86,11 @@ Outputs:
     Value: !GetAtt ScipoolprodAdminSamlProviderRole.Arn
     Export:
       Name: !Sub '${AWS::Region}-${AWS::StackName}-ScipoolprodAdminSamlProviderRoleArn'
+  ScipoolprodCommunityMgramlProviderArn:
+    Value: !Ref ScipoolprodCommunityMgrSamlProvider
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-ScipoolprodCommunityMgrSamlProviderArn'
+  ScipoolprodCommunityMgrSamlProviderRoleArn:
+    Value: !GetAtt ScipoolprodCommunityMgrSamlProviderRole.Arn
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-ScipoolprodCommunityMgrSamlProviderRoleArn'
