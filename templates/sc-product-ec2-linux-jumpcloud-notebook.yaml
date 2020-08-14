@@ -47,10 +47,14 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.1/ec2/sc-ec2-linux-jumpcloud-notebook.yaml'
           Name: 'v1.1.1'
-        - Description: !Sub 'Remove Jumpcloud Integration. Last updated at ${StackDatetime}'
+        - Description: 'Remove Jumpcloud Integration.'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.2/ec2/sc-ec2-linux-jumpcloud-notebook.yaml'
           Name: 'v1.1.2'
+        - Description: !Sub 'Update Cloudformation hooks. Last updated at ${StackDatetime}'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.3/ec2/sc-ec2-linux-jumpcloud-notebook.yaml'
+          Name: 'v1.1.3'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:
