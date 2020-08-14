@@ -1,7 +1,8 @@
 #! /usr/bin/env python3
 
+# Run `manage_ec2.py --help` for commands and available parameters
+
 """Manage EC2 Instances
-Run `manage_ec2.py --help` for commands and available parameters
 """
 
 import argparse
@@ -24,8 +25,12 @@ def parse_args():
         action='store_true',
         help='Shutdown instances')
     parser.add_argument(
-        '--aws-profile',
-        help='AWS user profile')
+        '-p', '--profile',
+        help='AWS profile')
+    parser.add_argument(
+        '-r', '--region',
+        default='us-east-1',
+        help='AWS region (default us-east-1)')
     return parser.parse_args()
 
 def get_instances(session, synapse_id):
@@ -70,7 +75,7 @@ def stop_instances(session, instances):
 def main():
     args = parse_args()
     synapse_id = args.synapse_id
-    session = boto3.Session(profile_name=args.aws_profile)
+    session = boto3.Session(profile_name=args.profile, region_name=args.region)
 
     instances = get_instances(session, synapse_id)
     print("instances for synapse user "
