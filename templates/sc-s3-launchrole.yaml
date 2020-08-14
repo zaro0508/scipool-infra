@@ -37,6 +37,7 @@ Resources:
                   - "iam:CreateRole"
                   - "iam:DetachRolePolicy"
                   - "iam:AttachRolePolicy"
+                  - "iam:TagRole"
                   - "cloudformation:DescribeStackResource"
                   - "cloudformation:DescribeStackResources"
                   - "cloudformation:GetTemplate"
