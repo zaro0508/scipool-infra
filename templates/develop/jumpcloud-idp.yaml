@@ -68,7 +68,12 @@ Resources:
           -
             Effect: "Allow"
             Action:
+              - aws-portal:ViewUsage
               - aws-portal:ViewBilling
+              - cur:DescribeReportDefinitions
+              - cur:PutReportDefinition
+              - cur:DeleteReportDefinition
+              - cur:ModifyReportDefinition
             Resource: "*"
 
 Outputs:
