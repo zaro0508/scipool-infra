@@ -34,7 +34,7 @@ def parse_args():
     return parser.parse_args()
 
 def get_instances(session, synapse_id):
-    """Get all running instances owned by synapse user"""
+    """Get all active instances owned by synapse user"""
     client = session.client('ec2')
 
     response = client.describe_instances(
@@ -49,18 +49,16 @@ def get_instances(session, synapse_id):
         ],
     )
 
-    running_instances = []
-    if len(response['Reservations']) < 1:
-        return running_instances
-
+    ACTIVE_STATUS = ['pending', 'running']
+    active_instances = []
     for reservation in response['Reservations']:
         instances = reservation['Instances']
         for instance in instances:
-            for instance in instances:
-                if instance['State']['Name'] == 'running':
-                    running_instances.append(instance['InstanceId'])
+            instance_state = instance['State']['Name']
+            if instance_state in ACTIVE_STATUS:
+                active_instances.append(instance['InstanceId'])
 
-    return running_instances
+    return active_instances
 
 def stop_instances(session, instances):
     """Stops all instances"""
@@ -78,7 +76,7 @@ def main():
     session = boto3.Session(profile_name=args.profile, region_name=args.region)
 
     instances = get_instances(session, synapse_id)
-    print("instances for synapse user "
+    print("Instances for synapse user "
           f'{synapse_id}'
           " : "
           f'{instances}')
@@ -89,7 +87,7 @@ def main():
             if verify is not 'y' and verify is not 'Y':
                 print('Exiting')
                 sys.exit()
-        print("stopping all instances")
+        print("All instances stopped")
         stop_instances(session, instances)
 
 if __name__ == "__main__":
