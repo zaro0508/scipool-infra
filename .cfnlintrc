@@ -1,2 +1,0 @@
-ignore_templates:
-  - templates/**/lambda-budgets/*.yaml
