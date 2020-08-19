@@ -27,10 +27,6 @@ def parse_args():
     parser.add_argument(
         '-p', '--profile',
         help='Name of AWS profile in the local config file')
-    parser.add_argument(
-        '-r', '--region',
-        default='us-east-1',
-        help='AWS region (default us-east-1)')
     return parser.parse_args()
 
 def get_instances(session, synapse_id):
@@ -78,7 +74,7 @@ def stop_instances(session, instances):
 def main():
     args = parse_args()
     synapse_id = args.synapse_id
-    session = boto3.Session(profile_name=args.profile, region_name=args.region)
+    session = boto3.Session(profile_name=args.profile)
 
     instances = get_instances(session, synapse_id)
     print("Instances for synapse user "
