@@ -15,18 +15,18 @@ def parse_args():
         description=__doc__)
     parser.add_argument(
         'synapse_id',
-        help='The synapse user ID')
+        help='The ID of the Synapse user who provisioned the instances to be managed')
     parser.add_argument(
         '-y', '--yes',
         action='store_true',
         help='Skip verification prompts')
     parser.add_argument(
-        '-s', '--shutdown',
+        '-s', '--stop',
         action='store_true',
-        help='Shutdown instances')
+        help='Stop instances')
     parser.add_argument(
         '-p', '--profile',
-        help='AWS profile')
+        help='Name of AWS profile in the local config file')
     parser.add_argument(
         '-r', '--region',
         default='us-east-1',
@@ -40,10 +40,15 @@ def get_instances(session, synapse_id):
     response = client.describe_instances(
         Filters=[
             {
+                'Name': 'tag-key',
+                'Values': [
+                    'aws:servicecatalog:provisioningPrincipalArn'
+                ]
+            },
+            {
                 'Name': 'tag-value',
                 'Values': [
-                    'arn:aws:sts::*:assumed-role/*/'
-                    f'{synapse_id}'
+                    f'arn:aws:sts::*:assumed-role/*/{synapse_id}'
                 ]
             },
         ],
@@ -81,7 +86,7 @@ def main():
           " : "
           f'{instances}')
 
-    if args.shutdown:
+    if args.stop:
         if not args.yes:
             verify = input('Confirm that you want to stop all instances (y/n): ')
             if verify is not 'y' and verify is not 'Y':
