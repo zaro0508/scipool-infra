@@ -35,10 +35,14 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.1/s3/sc-s3-synapse-ra-v1.0.1.yaml'
           Name: 'v1.0.1'
-        - Description: !Sub 'Fix resource contention bug with S3 custom resources. Last updated at ${StackDatetime}.'
+        - Description: 'Fix resource contention bug with S3 custom resources'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.2/s3/sc-s3-synapse-ra-v1.0.2.yaml'
           Name: 'v1.0.2'
+        - Description: !Sub 'Allow multiple synapse bucket owners. Last updated at ${StackDatetime}.'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.6/s3/sc-s3-synapse-ra.yaml'
+          Name: 'v1.1.6'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:
