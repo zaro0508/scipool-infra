@@ -4,4 +4,5 @@ teams:
     amount: '10'
     period: ANNUALLY
     unit: USD
-    community_manager_emails: ['someone@example.org']
+    community_manager_emails:
+      - 'sc-support-dev@sagebase.org'
