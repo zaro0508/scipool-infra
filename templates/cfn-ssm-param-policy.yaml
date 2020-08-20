@@ -12,7 +12,7 @@ Resources:
             Effect: 'Allow'
             Action: 'lambda:InvokeFunction'
             Resource: !ImportValue
-              'Fn::Sub': '${AWS::Region}-cfn-ssm-param-macro-SsmParamFunctionArn'
+              'Fn::Sub': '${AWS::Region}-cfn-macro-ssm-param-SsmParamFunctionArn'
       Roles:
         - !ImportValue
           'Fn::Sub': '${AWS::Region}-sc-ec2vpc-launchrole-LaunchRoleName'

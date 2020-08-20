@@ -5,4 +5,4 @@ stack_tags:
   Project: "Infrastructure"
   OwnerEmail: "it@sagebase.org"
 dependencies:
-  - "prod/cfn-ssm-param-macro.yaml"
+  - "prod/cfn-macro-ssm-param.yaml"
