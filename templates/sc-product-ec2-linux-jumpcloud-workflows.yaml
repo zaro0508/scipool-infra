@@ -55,10 +55,14 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.4/ec2/sc-ec2-linux-jumpcloud-workflows.yaml'
           Name: 'v1.1.4'
-        - Description: !Sub 'Add ssm-user before adding to docker group. Last updated at ${StackDatetime}.'
+        - Description: 'Add ssm-user before adding to docker group'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.5/ec2/sc-ec2-linux-jumpcloud-workflows.yaml'
           Name: 'v1.1.5'
+        - Description: !Sub 'Use SynapseTagger. Last updated at ${StackDatetime}.'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.7/ec2/sc-ec2-linux-jumpcloud-workflows.yaml'
+          Name: 'v1.1.7'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:

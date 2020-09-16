@@ -43,6 +43,10 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.6/s3/sc-s3-synapse-ra.yaml'
           Name: 'v1.1.6'
+        - Description: !Sub 'Use SynapseTagger. Last updated at ${StackDatetime}.'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.7/s3/sc-s3-synapse-ra.yaml'
+          Name: 'v1.1.7'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:
