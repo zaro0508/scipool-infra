@@ -27,6 +27,8 @@ Resources:
       Description: This product builds an AWS S3 bucket with private access
         for Synapse.
       ProvisioningArtifactParameters:
+        # StackDatetime is used to force this template to pick updated nested stack code.  Add it to
+        # the description to force cloudformation to update the stack with the latest code.
         - Description: 'Baseline version.'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.0/s3/sc-s3-synapse-ra-v1.0.0.yaml'
@@ -43,6 +45,10 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.6/s3/sc-s3-synapse-ra.yaml'
           Name: 'v1.1.6'
+        - Description: !Sub 'Use SynapseTagger. Last updated at ${StackDatetime}.'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.7/s3/sc-s3-synapse-ra.yaml'
+          Name: 'v1.1.7'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:

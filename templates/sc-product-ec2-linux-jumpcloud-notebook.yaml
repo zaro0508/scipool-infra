@@ -31,6 +31,8 @@ Resources:
       Description: This product builds one Linux EC2 instance using an Rstudio
         AMI based on Ubuntu and maintained by Sage Bionetworks.
       ProvisioningArtifactParameters:
+        # StackDatetime is used to force this template to pick updated nested stack code.  Add it to
+        # the description to force cloudformation to update the stack with the latest code.
         - Description: 'Baseline version.'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.0/ec2/sc-ec2-linux-jumpcloud-notebook-v1.0.0.yaml'
@@ -51,10 +53,14 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.2/ec2/sc-ec2-linux-jumpcloud-notebook.yaml'
           Name: 'v1.1.2'
-        - Description: !Sub 'Update Cloudformation hooks. Last updated at ${StackDatetime}'
+        - Description: 'Update Cloudformation hooks'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.3/ec2/sc-ec2-linux-jumpcloud-notebook.yaml'
           Name: 'v1.1.3'
+        - Description: !Sub 'Use SynapseTagger. Last updated at ${StackDatetime}.'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.7/ec2/sc-ec2-linux-jumpcloud-notebook.yaml'
+          Name: 'v1.1.7'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:
