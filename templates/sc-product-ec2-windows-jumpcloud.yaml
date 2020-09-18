@@ -41,10 +41,14 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.3/ec2/sc-ec2-windows-jumpcloud.yaml'
           Name: 'v1.1.3'
-        - Description: !Sub 'Use SynapseTagger. Last updated at ${StackDatetime}.'
+        - Description: 'Use SynapseTagger'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.7/ec2/sc-ec2-windows-jumpcloud.yaml'
           Name: 'v1.1.7'
+        - Description: !Sub 'Add a synapse teamId tag. Last updated at ${StackDatetime}.'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.8/ec2/sc-ec2-windows-jumpcloud.yaml'
+          Name: 'v1.1.8'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:

@@ -37,10 +37,14 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.1/s3/sc-s3-encrypted-ra-v1.0.1.yaml'
           Name: 'v1.0.1'
-        - Description: !Sub 'Use SynapseTagger. Last updated at ${StackDatetime}.'
+        - Description: 'Use SynapseTagger'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.7/s3/sc-s3-encrypted-ra.yaml'
           Name: 'v1.1.7'
+        - Description: !Sub 'Add a synapse teamId tag. Last updated at ${StackDatetime}.'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.8/s3/sc-s3-encrypted-ra.yaml'
+          Name: 'v1.1.8'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:
