@@ -31,6 +31,8 @@ Resources:
       Description: This product builds one Linux EC2 instance using an Ubuntu AMI
         with workflows software installed. Maintained by Sage Bionetworks.
       ProvisioningArtifactParameters:
+        # StackDatetime is used to force this template to pick updated nested stack code.  Add it to
+        # the description to force cloudformation to update the stack with the latest code.
         - Description: 'Baseline version.'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.0/ec2/sc-ec2-linux-jumpcloud-workflows-v1.0.0.yaml'
