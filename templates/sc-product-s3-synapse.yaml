@@ -41,14 +41,18 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.2/s3/sc-s3-synapse-ra-v1.0.2.yaml'
           Name: 'v1.0.2'
-        - Description: !Sub 'Allow multiple synapse bucket owners. Last updated at ${StackDatetime}.'
+        - Description: 'Allow multiple synapse bucket owners'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.6/s3/sc-s3-synapse-ra.yaml'
           Name: 'v1.1.6'
-        - Description: !Sub 'Use SynapseTagger. Last updated at ${StackDatetime}.'
+        - Description: 'Use SynapseTagger'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.7/s3/sc-s3-synapse-ra.yaml'
           Name: 'v1.1.7'
+        - Description: !Sub 'Remove VpcName input. Last updated at ${StackDatetime}.'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.8/s3/sc-s3-synapse-ra.yaml'
+          Name: 'v1.1.8'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:

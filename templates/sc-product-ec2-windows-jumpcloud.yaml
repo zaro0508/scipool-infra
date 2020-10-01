@@ -37,14 +37,18 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.0.0/ec2/sc-ec2-windows-jumpcloud-v1.0.0.yaml'
           Name: 'v1.0.0'
-        - Description: !Sub 'Update base AMI and Cloudformation hooks. Last updated at ${StackDatetime}.'
+        - Description: 'Update base AMI and Cloudformation hooks'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.3/ec2/sc-ec2-windows-jumpcloud.yaml'
           Name: 'v1.1.3'
-        - Description: !Sub 'Use SynapseTagger. Last updated at ${StackDatetime}.'
+        - Description: 'Use SynapseTagger'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.7/ec2/sc-ec2-windows-jumpcloud.yaml'
           Name: 'v1.1.7'
+        - Description: !Sub 'Remove VpcName input. Last updated at ${StackDatetime}.'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.8/ec2/sc-ec2-windows-jumpcloud.yaml'
+          Name: 'v1.1.8'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:
