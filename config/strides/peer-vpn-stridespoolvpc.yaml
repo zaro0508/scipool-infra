@@ -1,5 +1,7 @@
 template_path: remote/peer-route-config.yaml
 stack_name: peer-vpn-stridespoolvpc
+dependencies:
+  - strides/stridespoolvpc.yaml
 parameters:
   PeeringConnectionId: "pcx-0631346ea5ff7181c"  # org-sagebase-strides peering connection ID
   VpcPrivateRouteTable: !stack_output_external stridespoolvpc::PrivateRouteTable
