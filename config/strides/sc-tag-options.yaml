@@ -1,0 +1,37 @@
+# Tag options for internal Sage teams
+template_path: "sc-tag-options.j2"
+stack_name: "sc-tag-options"
+stack_tags:
+  Department: "Platform"
+  Project: "Infrastructure"
+  OwnerEmail: "it@sagebase.org"
+dependencies:
+  - "strides/sc-portfolio-ec2.yaml"
+  - "strides/sc-portfolio-ec2-external.yaml"
+  - "strides/sc-portfolio-s3-basic.yaml"
+sceptre_user_data:
+  Departments:
+    - "CompOnc"
+    - "Governance"
+    - "NDR"
+    - "Platform"
+    - "SysBio"
+  Projects:
+    - "amp-ad"
+    - "ACT"
+    - "challenge"  # Sometimes challenges aren't always DREAM
+    - "csbs"
+    - "dream"
+    - "dream/metadata"
+    - "genie"
+    - "htan"
+    - "iAtlas"
+    - "imCORE"
+    - "Infrastructure"
+    - "neurofibromatosis"
+    - "pson"
+    - "PsychENCODE"
+    - "veo-ibd"
+  ProductIDs:
+    - !stack_output_external sc-portfolio-ec2::SCEC2portfolioId
+    - !stack_output_external sc-portfolio-s3-basic::SCS3portfolioId
