@@ -41,10 +41,14 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.7/s3/sc-s3-encrypted-ra.yaml'
           Name: 'v1.1.7'
-        - Description: !Sub 'Remove VpcName input. Last updated at ${StackDatetime}.'
+        - Description: 'Remove VpcName input'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.8/s3/sc-s3-encrypted-ra.yaml'
           Name: 'v1.1.8'
+        - Description: !Sub 'Update for strides. Last updated at ${StackDatetime}.'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.9/s3/sc-s3-encrypted-ra.yaml'
+          Name: 'v1.1.9'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:
