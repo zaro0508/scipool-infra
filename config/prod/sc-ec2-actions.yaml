@@ -8,4 +8,4 @@ stack_tags:
   Project: "Infrastructure"
   OwnerEmail: "it@sagebase.org"
 parameters:
-  AssumeRole: "arn:aws:iam::237179673806:role/SCEC2LaunchRole"
+  AssumeRole: !stack_output_external sc-ec2vpc-launchrole::LaunchRoleArn
