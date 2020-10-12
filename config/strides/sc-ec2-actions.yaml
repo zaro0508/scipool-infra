@@ -1,8 +1,8 @@
 template_path: "sc-ec2-actions.yaml"
 stack_name: "sc-ec2-actions"
 dependencies:
-  - "prod/sc-enduser-iam.yaml"
-  - "prod/cfn-cr-sc-actions-provider.yaml"
+  - "strides/sc-enduser-iam.yaml"
+  - "strides/cfn-cr-sc-actions-provider.yaml"
 stack_tags:
   Department: "Platform"
   Project: "Infrastructure"
