@@ -19,10 +19,7 @@ Resources:
         Statement:
           - Effect: Allow
             Principal:
-              AWS: "*"
-            Condition:
-              StringLike:
-                aws:PrincipalArn: !Ref SynapseLoginInstanceRoleArn
+              AWS: !Ref SynapseLoginInstanceRoleArn
             Action:
               - 'sts:AssumeRole'
               - 'sts:TagSession'
@@ -41,10 +38,7 @@ Resources:
         Statement:
           - Effect: Allow
             Principal:
-              AWS: "*"
-            Condition:
-              StringLike:
-                aws:PrincipalArn: !Ref SynapseLoginInstanceRoleArn
+              AWS: !Ref SynapseLoginInstanceRoleArn
             Action:
               - 'sts:AssumeRole'
               - 'sts:TagSession'
