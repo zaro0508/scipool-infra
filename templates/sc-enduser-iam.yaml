@@ -1,4 +1,8 @@
 Description: "ServiceCatalog End User policy and group (fdp-1p4dlgcp7)"
+Parameters:
+  SynapseLoginInstanceRoleArn:
+    Type: String
+    Description: The Synapse login app's IAM instance role ARN
 Resources:
   SCEnduserRole:
     Type: AWS::IAM::Role
@@ -15,10 +19,7 @@ Resources:
         Statement:
           - Effect: Allow
             Principal:
-              AWS: "*"
-            Condition:
-              StringLike:
-                aws:PrincipalArn: !Sub 'arn:aws:iam::${AWS::AccountId}:role/synapse-login-scipool*-InstanceRole-*'
+              AWS: !Ref SynapseLoginInstanceRoleArn
             Action:
               - 'sts:AssumeRole'
               - 'sts:TagSession'
@@ -37,10 +38,7 @@ Resources:
         Statement:
           - Effect: Allow
             Principal:
-              AWS: "*"
-            Condition:
-              StringLike:
-                aws:PrincipalArn: !Sub 'arn:aws:iam::${AWS::AccountId}:role/synapse-login-scipool*-InstanceRole-*'
+              AWS: !Ref SynapseLoginInstanceRoleArn
             Action:
               - 'sts:AssumeRole'
               - 'sts:TagSession'
