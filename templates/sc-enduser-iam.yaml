@@ -18,7 +18,7 @@ Resources:
               AWS: "*"
             Condition:
               StringLike:
-                aws:PrincipalArn: !Sub 'arn:aws:iam::${AWS::AccountId}:role/synapse-login-scipool*-InstanceRole-*'
+                aws:PrincipalArn: !Sub 'arn:aws:iam::${AWS::AccountId}:role/synapse-login-*-InstanceRole-*'
             Action:
               - 'sts:AssumeRole'
               - 'sts:TagSession'
@@ -40,7 +40,7 @@ Resources:
               AWS: "*"
             Condition:
               StringLike:
-                aws:PrincipalArn: !Sub 'arn:aws:iam::${AWS::AccountId}:role/synapse-login-scipool*-InstanceRole-*'
+                aws:PrincipalArn: !Sub 'arn:aws:iam::${AWS::AccountId}:role/synapse-login-*-InstanceRole-*'
             Action:
               - 'sts:AssumeRole'
               - 'sts:TagSession'
