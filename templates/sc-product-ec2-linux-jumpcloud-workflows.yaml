@@ -69,10 +69,14 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.8/ec2/sc-ec2-linux-jumpcloud-workflows.yaml'
           Name: 'v1.1.8'
-        - Description: !Sub 'Update for strides. Last updated at ${StackDatetime}.'
+        - Description: 'Update for strides'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.9/ec2/sc-ec2-linux-jumpcloud-workflows.yaml'
           Name: 'v1.1.9'
+        - Description: !Sub 'Include params in mapping. Last updated at ${StackDatetime}.'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.10/ec2/sc-ec2-linux-jumpcloud-workflows.yaml'
+          Name: 'v1.1.10'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:
