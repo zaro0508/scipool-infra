@@ -73,10 +73,14 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.9/ec2/sc-ec2-linux-jumpcloud-workflows.yaml'
           Name: 'v1.1.9'
-        - Description: !Sub 'Include params in mapping. Last updated at ${StackDatetime}.'
+        - Description: 'Include params in mapping.'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.10/ec2/sc-ec2-linux-jumpcloud-workflows.yaml'
           Name: 'v1.1.10'
+        - Description: !Sub 'Workflow software updates: toil 3.24.0 -> 4.2.0, cwltool 2.0.20200303141624 -> 3.0.20200807132242, synapseclient 1.9.4 -> 2.2.0. Last updated at ${StackDatetime}.'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.11/ec2/sc-ec2-linux-jumpcloud-workflows.yaml'
+          Name: 'v1.1.11'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:
