@@ -31,6 +31,7 @@ sceptre_user_data:
     - "neurofibromatosis"
     - "pson"
     - "PsychENCODE"
+    - "TESLA"
     - "veo-ibd"
   ProductIDs:
     - !stack_output_external sc-portfolio-ec2::SCEC2portfolioId
