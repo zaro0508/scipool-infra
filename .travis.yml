@@ -1,29 +1,47 @@
 language: python
-python: 3.6
+python: 3.7
 cache: pip
 branches:
   only:
   - develop
   - prod
-  - strides
 install:
-  - wget https://github.com/Sage-Bionetworks/infra-utils/archive/master.zip -O /tmp/infra-utils.zip
-  - unzip -j -n /tmp/infra-utils.zip -x "infra-utils-master/.gitignore" "infra-utils-master/LICENSE" "infra-utils-master/*.md" "infra-utils-master/aws/*"
-  - ./setup_aws_cli.sh || travis_terminate 1
-  - pip install pre-commit sceptre==2.3.0 sceptre-ssm-resolver sceptre-date-resolver
+  - pip install pre-commit sceptre==2.3.0 sceptre-ssm-resolver awscli
 stages:
   - name: validate
-  - name: deploy
-    if: type = push
+  - name: deploy-develop
+    if: type = push AND branch = develop
+  - name: deploy-prod   # deploy to all production AWS accounts
+    if: type = push AND branch = prod
 jobs:
   fast_finish: true
   include:
     - stage: validate
+      name: "validate-templates"
       script:
-        - pre-commit autoupdate
         - pre-commit run --all-files
-    - stage: deploy
+    - stage: deploy-develop
+      name: "org-sagebase-scipooldev"
       script:
+        - mkdir -p ~/.aws
+        - echo -e "[default]\nregion=us-east-1\nsource_profile=default\nrole_arn=$AwsCfServiceRoleArn_develop" > ~/.aws/config
+        - echo -e "[default]\nregion=us-east-1\naws_access_key_id=$AwsTravisAccessKey_develop\naws_secret_access_key=$AwsTravisSecretAccessKey_develop" > ~/.aws/credentials
+        - sceptre launch --yes develop
+    - stage: deploy-prod
+      name: "org-sagebase-scipoolprod"
+      script:
+        - mkdir -p ~/.aws
+        - echo -e "[default]\nregion=us-east-1\nsource_profile=default\nrole_arn=$AwsCfServiceRoleArn_prod" > ~/.aws/config
+        - echo -e "[default]\nregion=us-east-1\naws_access_key_id=$AwsTravisAccessKey_prod\naws_secret_access_key=$AwsTravisSecretAccessKey_prod" > ~/.aws/credentials
         # SC-26 & SC-219 workaround: dis-associate and re-associate SC actions on every deploy
-        - sceptre delete $TRAVIS_BRANCH/sc-product-assoc-ec2 --yes
-        - sceptre launch $TRAVIS_BRANCH --yes
+        - sceptre delete --yes prod/sc-product-assoc-ec2
+        - sceptre launch --yes prod
+    - stage: deploy-prod
+      name: "org-sagebase-strides"
+      script:
+        - mkdir -p ~/.aws
+        - echo -e "[default]\nregion=us-east-1\nsource_profile=default\nrole_arn=$AwsCfServiceRoleArn_strides" > ~/.aws/config
+        - echo -e "[default]\nregion=us-east-1\naws_access_key_id=$AwsTravisAccessKey_strides\naws_secret_access_key=$AwsTravisSecretAccessKey_strides" > ~/.aws/credentials
+        # SC-26 & SC-219 workaround: dis-associate and re-associate SC actions on every deploy
+        - sceptre delete --yes strides/sc-product-assoc-ec2
+        - sceptre launch --yes strides
