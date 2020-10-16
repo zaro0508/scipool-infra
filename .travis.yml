@@ -6,7 +6,7 @@ branches:
   - develop
   - prod
 install:
-  - pip install pre-commit sceptre==2.3.0 sceptre-ssm-resolver awscli
+  - pip install pre-commit sceptre==2.3.0 sceptre-ssm-resolver sceptre-date-resolver awscli
 stages:
   - name: validate
   - name: deploy-develop
