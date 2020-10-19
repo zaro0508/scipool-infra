@@ -10,7 +10,9 @@ dependencies:
   - "prod/sc-portfolio-ec2-external.yaml"
   - "prod/sc-portfolio-s3-basic.yaml"
 sceptre_user_data:
-  Departments: !file_contents sc-tag-options/external/Departments.json
-  Projects: !file_contents sc-tag-options/external/Projects.json
+  Departments:
+    - "sage-external"
+  Projects:
+    - "collaborator"
   ProductIDs:
     - !stack_output_external sc-portfolio-ec2-external::SCEC2portfolioId
