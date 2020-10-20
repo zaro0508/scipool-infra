@@ -10,9 +10,14 @@ dependencies:
   - "strides/sc-portfolio-ec2-external.yaml"
   - "strides/sc-portfolio-s3-basic.yaml"
 sceptre_user_data:
+<<<<<<< HEAD
   Departments:
     - "sage-external"
   Projects:
     - "collaborator"
+=======
+  Departments: !file sc-tag-options/external/Departments.json
+  Projects: !file sc-tag-options/external/Projects.json
+>>>>>>> aac298c... 2nd attempt at DRY tag options
   ProductIDs:
     - !stack_output_external sc-portfolio-ec2-external::SCEC2portfolioId
