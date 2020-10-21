@@ -16,12 +16,6 @@ Resources:
         -
           AttributeName: SynapseUserId
           AttributeType: S
-        -
-          AttributeName: MarketplaceProductCode
-          AttributeType: S
-        -
-          AttributeName: MarketplaceCustomerId
-          AttributeType: S
       KeySchema:
         -
           AttributeName: SynapseUserId

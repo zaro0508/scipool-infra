@@ -1,0 +1,7 @@
+template_path: "login-role-marketplace-policy.yaml"
+stack_name: "login-role-marketplace-policy"
+dependencies:
+  - "strides/essentials.yaml"
+parameters:
+  # InstanceRoleArn from https://github.com/Sage-Bionetworks/synapse-login-aws-infra/blob/strides/templates/app.yaml
+  SynapseLoginInstanceRoleArn: !stack_output_external synapse-login-strides::InstanceRoleArn
