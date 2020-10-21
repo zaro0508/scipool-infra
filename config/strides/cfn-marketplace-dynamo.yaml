@@ -1,0 +1,7 @@
+template_path: "cfn-marketplace-dynamo.yaml"
+stack_name: "cfn-marketplace-dynamo"
+dependencies:
+  - "strides/essentials.yaml"
+parameters:
+  # InstanceRoleArn from https://github.com/Sage-Bionetworks/synapse-login-aws-infra/blob/strides/templates/app.yaml
+  SynapseLoginInstanceRoleArn: !stack_output_external synapse-login-strides::InstanceRoleArn
