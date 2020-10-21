@@ -5,12 +5,12 @@ Parameters:
   SynapseLoginInstanceRoleArn:
     Type: String
     Description: The Synapse login app's IAM instance role ARN
-    
+
 Resources:
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
-    Properties: 
-      TableName: MarketplaceRegistration 
+    Properties:
+      TableName: MarketplaceRegistration
       BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
         -
@@ -20,7 +20,7 @@ Resources:
         -
           AttributeName: SynapseUserId
           KeyType: HASH
-  
+
   DynamoRWPolicy:
     Type: AWS::IAM::ManagedPolicy
     Properties:
@@ -29,12 +29,12 @@ Resources:
         Statement:
           - Sid: DynamoRW
             Effect: 'Allow'
-            Action: 
-            - 'dynamodb:*Get*'
-            - 'dynamodb:*List*'
-            - 'dynamodb:Query'
-            - 'dynamodb:*Write*'
-            - 'dynamodb:*Put*'
+            Action:
+              - 'dynamodb:*Get*'
+              - 'dynamodb:*List*'
+              - 'dynamodb:Query'
+              - 'dynamodb:*Write*'
+              - 'dynamodb:*Put*'
             Resource: !GetAtt DynamoDBTable.Arn
       Roles:
         - !Ref SynapseLoginInstanceRoleArn

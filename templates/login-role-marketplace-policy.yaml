@@ -3,7 +3,7 @@ Parameters:
   SynapseLoginInstanceRoleArn:
     Type: String
     Description: The Synapse login app's IAM instance role ARN
-    
+
 Resources:
   ResolveCustomerMarketplacePolicy:
     Type: "AWS::IAM::ManagedPolicy"
@@ -16,6 +16,6 @@ Resources:
             Effect: Allow
             Action: "aws-marketplace:ResolveCustomer"
             Resource: "*"
-            
+
       Roles:
         - !Ref SynapseLoginInstanceRoleArn
