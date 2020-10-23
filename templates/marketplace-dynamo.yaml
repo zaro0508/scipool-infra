@@ -39,8 +39,8 @@ Resources:
         - !Ref SynapseLoginInstanceRoleArn
 
 Outputs:
-  MarketplaceDynamoTableName:
-    Description: 'Name of DynamoDB Table for Marketplace registration information'
-    Value: !Ref DynamoDBTable.TableName
+  MarketplaceDynamoTable:
+    Description: 'DynamoDB Table for Marketplace registration information'
+    Value: !Ref DynamoDBTable
     Export:
-      Name: !Sub '${AWS::Region}-${AWS::StackName}-MarketplaceDynamoDBTableName'
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-MarketplaceDynamoDBTable'
