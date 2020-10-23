@@ -43,4 +43,4 @@ Outputs:
     Description: 'Name of DynamoDB Table for Marketplace registration information'
     Value: !Ref DynamoDBTable.TableName
     Export:
-      Name: !Sub '${AWS::Region}-${AWS::StackName}-MarketplaceDynamoDBTableName'	
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-MarketplaceDynamoDBTableName'
