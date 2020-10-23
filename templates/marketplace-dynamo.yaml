@@ -10,7 +10,6 @@ Resources:
   DynamoDBTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: MarketplaceRegistration
       BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
         -
@@ -38,3 +37,10 @@ Resources:
             Resource: !GetAtt DynamoDBTable.Arn
       Roles:
         - !Ref SynapseLoginInstanceRoleArn
+
+Outputs:
+  MarketplaceDynamoTableName:
+    Description: 'Name of DynamoDB Table for Marketplace registration information'
+    Value: !Ref DynamoDBTable.TableName
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-MarketplaceDynamoDBTableName'	

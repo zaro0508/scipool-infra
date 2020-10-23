@@ -1,5 +1,5 @@
-template_path: "login-role-marketplace-policy.yaml"
-stack_name: "login-role-marketplace-policy"
+template_path: "idp-marketplace-policy.yaml"
+stack_name: "idp-marketplace-policy"
 dependencies:
   - "prod/essentials.yaml"
 parameters:

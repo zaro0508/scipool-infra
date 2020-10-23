@@ -1,7 +1,8 @@
-template_path: "cfn-marketplace-dynamo.yaml"
-stack_name: "cfn-marketplace-dynamo"
+template_path: "marketplace-dynamo.yaml"
+stack_name: "marketplace-dynamo"
 dependencies:
   - "prod/essentials.yaml"
+  - "prod/synapse-oidc-idp.yaml"
 parameters:
   # InstanceRoleArn from https://github.com/Sage-Bionetworks/synapse-login-aws-infra/blob/prod/templates/app.yaml
   SynapseLoginInstanceRoleArn: !stack_output_external synapse-login-scipoolprod::InstanceRoleArn
