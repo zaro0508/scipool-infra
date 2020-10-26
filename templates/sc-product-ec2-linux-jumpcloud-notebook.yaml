@@ -69,10 +69,14 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.9/ec2/sc-ec2-linux-jumpcloud-notebook.yaml'
           Name: 'v1.1.9'
-        - Description: !Sub 'Include params in mapping. Last updated at ${StackDatetime}.'
+        - Description: 'Include params in mapping'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.10/ec2/sc-ec2-linux-jumpcloud-notebook.yaml'
           Name: 'v1.1.10'
+        - Description: !Sub 'Refactor apache script. Last updated at ${StackDatetime}.'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.12/ec2/sc-ec2-linux-jumpcloud-notebook.yaml'
+          Name: 'v1.1.12'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:
