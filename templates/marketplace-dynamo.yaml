@@ -36,7 +36,7 @@ Resources:
               - 'dynamodb:*Put*'
             Resource: !GetAtt DynamoDBTable.Arn
       Roles:
-        - !Ref SynapseLoginInstanceRoleArn
+        - !Ref SynapseLoginInstanceRole
 
 Outputs:
   MarketplaceDynamoTable:

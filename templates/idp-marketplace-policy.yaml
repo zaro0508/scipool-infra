@@ -18,4 +18,4 @@ Resources:
             Resource: "*"
 
       Roles:
-        - !Ref SynapseLoginInstanceRoleArn
+        - !Ref SynapseLoginInstanceRole
