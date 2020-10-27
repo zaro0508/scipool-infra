@@ -73,10 +73,14 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.10/ec2/sc-ec2-linux-jumpcloud-notebook.yaml'
           Name: 'v1.1.10'
-        - Description: !Sub 'Refactor apache script. Last updated at ${StackDatetime}.'
+        - Description: 'Refactor apache script'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.12/ec2/sc-ec2-linux-jumpcloud-notebook.yaml'
           Name: 'v1.1.12'
+        - Description: !Sub 'Fix policies. Last updated at ${StackDatetime}.'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.13/ec2/sc-ec2-linux-jumpcloud-notebook.yaml'
+          Name: 'v1.1.13'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:
