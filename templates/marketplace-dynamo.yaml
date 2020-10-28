@@ -2,7 +2,7 @@ Description: Set up DynamoDB for AWS Marketplace registration
 AWSTemplateFormatVersion: 2010-09-09
 
 Parameters:
-  SynapseLoginInstanceRoleArn:
+  SynapseLoginInstanceRole:
     Type: String
     Description: The Synapse login app's IAM instance role ARN
 
@@ -36,7 +36,7 @@ Resources:
               - 'dynamodb:*Put*'
             Resource: !GetAtt DynamoDBTable.Arn
       Roles:
-        - !Ref SynapseLoginInstanceRoleArn
+        - !Ref SynapseLoginInstanceRole
 
 Outputs:
   MarketplaceDynamoTable:

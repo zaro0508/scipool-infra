@@ -1,8 +1,8 @@
 Description: "Policy that lets the Synapse login role resolve marketplace customer"
 Parameters:
-  SynapseLoginInstanceRoleArn:
+  SynapseLoginInstanceRole:
     Type: String
-    Description: The Synapse login app's IAM instance role ARN
+    Description: The Synapse login app's IAM instance role name
 
 Resources:
   ResolveCustomerMarketplacePolicy:
@@ -18,4 +18,4 @@ Resources:
             Resource: "*"
 
       Roles:
-        - !Ref SynapseLoginInstanceRoleArn
+        - !Ref SynapseLoginInstanceRole
