@@ -44,3 +44,8 @@ Outputs:
     Value: !Ref DynamoDBTable
     Export:
       Name: !Sub '${AWS::Region}-${AWS::StackName}-MarketplaceDynamoDBTable'
+  MarketplaceDynamoTableArn:
+    Description: 'DynamoDB Table ARN for Marketplace registration information'
+    Value: !GetAtt DynamoDBTable.Arn
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-MarketplaceDynamoDBTableArn'
