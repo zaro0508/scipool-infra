@@ -57,10 +57,14 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.10/ec2/sc-ec2-windows-jumpcloud.yaml'
           Name: 'v1.1.10'
-        - Description: !Sub 'Fix policies. Last updated at ${StackDatetime}.'
+        - Description: 'Fix policies.'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.13/ec2/sc-ec2-windows-jumpcloud.yaml'
           Name: 'v1.1.13'
+        - Description: !Sub 'Restore set_env_var. Last updated at ${StackDatetime}.'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.14/ec2/sc-ec2-windows-jumpcloud.yaml'
+          Name: 'v1.1.14'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:
