@@ -1,0 +1,8 @@
+template_path: "idp-marketplace-policy.yaml"
+stack_name: "idp-marketplace-policy"
+dependencies:
+  - "prod/essentials.yaml"
+  - "prod/synapse-oidc-idp.yaml"
+parameters:
+  # InstanceRoleArn from https://github.com/Sage-Bionetworks/synapse-login-aws-infra/blob/prod/templates/app.yaml
+  SynapseLoginInstanceRole: !stack_output_external synapse-login-scipoolprod::InstanceRole

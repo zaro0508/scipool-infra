@@ -1,0 +1,8 @@
+template_path: "marketplace-dynamo.yaml"
+stack_name: "marketplace-dynamo"
+dependencies:
+  - "strides/essentials.yaml"
+  - "strides/synapse-oidc-idp.yaml"
+parameters:
+  # InstanceRoleArn from https://github.com/Sage-Bionetworks/synapse-login-aws-infra/blob/strides/templates/app.yaml
+  SynapseLoginInstanceRole: !stack_output_external synapse-login-strides::InstanceRole

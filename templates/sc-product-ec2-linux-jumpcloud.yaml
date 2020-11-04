@@ -64,10 +64,18 @@ Resources:
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.9/ec2/sc-ec2-linux-jumpcloud.yaml'
           Name: 'v1.1.9'
-        - Description: !Sub 'Include params in mapping. Last updated at ${StackDatetime}.'
+        - Description: 'Include params in mapping'
           Info:
             LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.10/ec2/sc-ec2-linux-jumpcloud.yaml'
           Name: 'v1.1.10'
+        - Description: 'Fix policies'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.13/ec2/sc-ec2-linux-jumpcloud.yaml'
+          Name: 'v1.1.13'
+        - Description: !Sub 'Restore set_env_vars. Last updated at ${StackDatetime}.'
+          Info:
+            LoadTemplateFromURL: !Sub '${RepoRootURL}/v1.1.14/ec2/sc-ec2-linux-jumpcloud.yaml'
+          Name: 'v1.1.14'
       'Fn::Transform':
         Name: 'AWS::Include'
         Parameters:

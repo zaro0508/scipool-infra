@@ -1,0 +1,51 @@
+Description: Set up DynamoDB for AWS Marketplace registration
+AWSTemplateFormatVersion: 2010-09-09
+
+Parameters:
+  SynapseLoginInstanceRole:
+    Type: String
+    Description: The Synapse login app's IAM instance role ARN
+
+Resources:
+  DynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        -
+          AttributeName: SynapseUserId
+          AttributeType: S
+      KeySchema:
+        -
+          AttributeName: SynapseUserId
+          KeyType: HASH
+
+  DynamoRWPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Sid: DynamoRW
+            Effect: 'Allow'
+            Action:
+              - 'dynamodb:*Get*'
+              - 'dynamodb:*List*'
+              - 'dynamodb:Query'
+              - 'dynamodb:*Write*'
+              - 'dynamodb:*Put*'
+            Resource: !GetAtt DynamoDBTable.Arn
+      Roles:
+        - !Ref SynapseLoginInstanceRole
+
+Outputs:
+  MarketplaceDynamoTable:
+    Description: 'DynamoDB Table for Marketplace registration information'
+    Value: !Ref DynamoDBTable
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-MarketplaceDynamoDBTable'
+  MarketplaceDynamoTableArn:
+    Description: 'DynamoDB Table ARN for Marketplace registration information'
+    Value: !GetAtt DynamoDBTable.Arn
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-MarketplaceDynamoDBTableArn'
