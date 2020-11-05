@@ -1,5 +1,0 @@
-template_path: "idp-marketplace-policy.yaml"
-stack_name: "idp-marketplace-policy"
-dependencies:
-  - "prod/essentials.yaml"
-  - "prod/synapse-oidc-idp.yaml"
