@@ -1,8 +1,4 @@
 Description: "Policy that lets the Synapse login role resolve marketplace customer"
-Parameters:
-  SynapseLoginInstanceRole:
-    Type: String
-    Description: The Synapse login app's IAM instance role name
 
 Resources:
   ResolveCustomerMarketplacePolicy:
@@ -17,5 +13,9 @@ Resources:
             Action: "aws-marketplace:ResolveCustomer"
             Resource: "*"
 
-      Roles:
-        - !Ref SynapseLoginInstanceRole
+Outputs:
+  ResolveCustomerMarketplacePolicyArn:
+    Description: Managed policy allowing access to the ResolveCustomer AWS Marketplace API
+    Value: !Ref ResolveCustomerMarketplacePolicy
+    Export:
+      Name: !Sub '${AWS::Region}-${AWS::StackName}-ResolveCustomerMarketplacePolicyArn'

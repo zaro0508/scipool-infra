@@ -3,6 +3,3 @@ stack_name: "idp-marketplace-policy"
 dependencies:
   - "strides/essentials.yaml"
   - "strides/synapse-oidc-idp.yaml"
-parameters:
-  # InstanceRoleArn from https://github.com/Sage-Bionetworks/synapse-login-aws-infra/blob/strides/templates/app.yaml
-  SynapseLoginInstanceRole: !stack_output_external synapse-login-strides::InstanceRole
