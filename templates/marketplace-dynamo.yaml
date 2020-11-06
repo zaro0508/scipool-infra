@@ -15,28 +15,7 @@ Resources:
           AttributeName: SynapseUserId
           KeyType: HASH
 
-  DynamoRWPolicy:
-    Type: AWS::IAM::ManagedPolicy
-    Properties:
-      PolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Sid: DynamoRW
-            Effect: 'Allow'
-            Action:
-              - 'dynamodb:*Get*'
-              - 'dynamodb:*List*'
-              - 'dynamodb:Query'
-              - 'dynamodb:*Write*'
-              - 'dynamodb:*Put*'
-            Resource: !GetAtt DynamoDBTable.Arn
-
 Outputs:
-  DynamoRWPolicyArn:
-    Description: Managed policy allowing R/W access to the DynamoDB Table created here
-    Value: !Ref DynamoRWPolicy
-    Export:
-      Name: !Sub '${AWS::Region}-${AWS::StackName}-DynamoRWPolicyArn'
   MarketplaceDynamoTable:
     Description: 'DynamoDB Table for Marketplace registration information'
     Value: !Ref DynamoDBTable
