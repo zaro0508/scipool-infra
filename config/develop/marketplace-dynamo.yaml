@@ -3,6 +3,3 @@ stack_name: "marketplace-dynamo"
 dependencies:
   - "develop/essentials.yaml"
   - "develop/synapse-oidc-idp.yaml"
-parameters:
-  # InstanceRoleArn from https://github.com/Sage-Bionetworks/synapse-login-aws-infra/blob/develop/templates/app.yaml
-  SynapseLoginInstanceRole: !stack_output_external synapse-login-scipooldev::InstanceRole
