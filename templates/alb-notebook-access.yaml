@@ -44,7 +44,7 @@ Resources:
         Ref: ApplicationLoadBalancer
       Certificates:
         - CertificateArn: !Ref SSLCertificateArn
-      SslPolicy: ELBSecurityPolicy-TLS-1-2-2017-01
+      SslPolicy: ELBSecurityPolicy-TLS-1-2-Ext-2018-06
       DefaultActions:
         - Type: redirect
           Order: 50000
