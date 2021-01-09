@@ -7,7 +7,7 @@ branches:
   - prod
 install:
   - pip install pre-commit sceptre==2.3.0 sceptre-ssm-resolver sceptre-date-resolver awscli
-  - pip install git+git://github.com/Sage-Bionetworks-IT/sceptre-file-resolver.git
+  - pip install git+git://github.com/Sceptre/sceptre-file-resolver.git
 stages:
   - name: validate
   - name: deploy-develop
