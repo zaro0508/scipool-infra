@@ -6,7 +6,7 @@ branches:
   - develop
   - prod
 install:
-  - pip install pre-commit sceptre==2.3.0 sceptre-ssm-resolver sceptre-date-resolver awscli
+  - pip install pre-commit sceptre sceptre-ssm-resolver sceptre-date-resolver awscli
   - pip install git+git://github.com/Sceptre/sceptre-file-resolver.git
 stages:
   - name: validate
@@ -35,7 +35,10 @@ jobs:
         - echo -e "[default]\nregion=us-east-1\nsource_profile=default\nrole_arn=$AwsCfServiceRoleArn_prod" > ~/.aws/config
         - echo -e "[default]\nregion=us-east-1\naws_access_key_id=$AwsTravisAccessKey_prod\naws_secret_access_key=$AwsTravisSecretAccessKey_prod" > ~/.aws/credentials
         # SC-26 & SC-219 workaround: dis-associate and re-associate SC actions on every deploy
-        - sceptre delete --yes prod/sc-product-assoc-ec2
+        - sceptre delete --yes prod/sc-product-assoc-ec2-linux-jumpcloud.yaml
+        - sceptre delete --yes prod/sc-product-assoc-ec2-linux-jumpcloud-notebook.yaml
+        - sceptre delete --yes prod/sc-product-assoc-ec2-linux-jumpcloud-workflows.yaml
+        - sceptre delete --yes prod/sc-product-assoc-ec2-linux-windows-jumpcloud.yaml
         - sceptre launch --yes prod
     - stage: deploy-prod
       name: "org-sagebase-strides"
@@ -44,5 +47,8 @@ jobs:
         - echo -e "[default]\nregion=us-east-1\nsource_profile=default\nrole_arn=$AwsCfServiceRoleArn_strides" > ~/.aws/config
         - echo -e "[default]\nregion=us-east-1\naws_access_key_id=$AwsTravisAccessKey_strides\naws_secret_access_key=$AwsTravisSecretAccessKey_strides" > ~/.aws/credentials
         # SC-26 & SC-219 workaround: dis-associate and re-associate SC actions on every deploy
-        - sceptre delete --yes strides/sc-product-assoc-ec2
+        - sceptre delete --yes prod/sc-product-assoc-ec2-linux-jumpcloud.yaml
+        - sceptre delete --yes prod/sc-product-assoc-ec2-linux-jumpcloud-notebook.yaml
+        - sceptre delete --yes prod/sc-product-assoc-ec2-linux-jumpcloud-workflows.yaml
+        - sceptre delete --yes prod/sc-product-assoc-ec2-linux-windows-jumpcloud.yaml
         - sceptre launch --yes strides
